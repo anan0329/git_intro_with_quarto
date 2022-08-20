@@ -1,0 +1,18 @@
+---
+format: 
+  revealjs:
+    slide-number: true
+    width: 1200
+    height: 900
+    background-transition: fade
+editor: source
+---
+
+
+[Git in 1 Hours]{style="font-size: 120px; font-weight: bold; line-height: 1em; margin: 0px"}
+
+<br>
+
+[Brian Yang]{style="font-size: 60px; font-weight: bold;"}
+
+[2022-08-13]{style="font-size: 50px;font-weight: bold;"}
