@@ -30,11 +30,14 @@ editor: source
 - Control **VERSION**
 
 - A version control system is a software that helps you control / manage different versions of source code.
+:::
+
+. . .
 
 - Two main types of VCS model:
   + centralized - all users connect to a central repository <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Apache_Subversion_logo.svg" style="display: inline-block; margin: 0; margin-bottom: -2px; height: 35px;"/></img>
   + distributed - each user has the entire repository on their machine <img src="https://miro.medium.com/max/766/1*co_1qORNdM0PI1nvCp7Iig.png" style="display: inline-block; margin: 0; margin-bottom: -2px; height: 35px;"/></img> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Mercurial_no_border_logo.svg/800px-Mercurial_no_border_logo.svg.png" style="display: inline-block; margin: 0; margin-bottom: -2px; height: 35px;"/></img> 
-:::
+
 
 ## Setup
 
