@@ -213,7 +213,7 @@ Everytime you works with a project, you should first check the status using `git
 - When starting a project with no files...
 ````{.bash }
 $ git status
-On branch master
+On branch main
 No commits yet
 nothing to commit (create/copy files and use "git add" to track)
 
@@ -493,7 +493,7 @@ Lets see the git status.
 
 ````{.bash}
 $ git status
-On branch master
+On branch main
 nothing to commit, working tree clean
 ````
 
@@ -786,7 +786,7 @@ $ git branch
   sidebar
 
 $ git log --oneline
-5246cbe (HEAD -> master, sidebar) add samples
+5246cbe (HEAD -> main, sidebar) add samples
 a65243c (to_delete) test commit
 
 
@@ -834,13 +834,13 @@ Let's play around with branches for a while
 
 ````{.bash code-line-numbers="1-3|5-12|14,15|17-21"}
 $ git branch
-* master
+* main
   sidebar
 
 $ echo "only on main" > onlyOnMain.txt
 
-$ git commit -a -m 'Things that are only on main branch'
-[master 7a24509] Things that are only on main branch
+$ git commit -a -m "Things that are only on main branch"
+[main 7a24509] Things that are only on main branch
  1 file changed, 1 insertion(+)
  create mode 100644 onlyOnMain.txt
 
@@ -855,3 +855,138 @@ $ ls -A
 
 
 ````
+
+
+## Magic merge
+
+- `git merge` Combining branches together.
+- There are two main types of merges in Git, a **Fast-forward merge** and a **regular merge**.
+
+
+## Magic merge
+
+::: {.r-stack}
+![](images/git_branch_12.png){.fragment width="1200" height="500"}
+
+![](images/git_merge_1.png){.fragment width="1200" height="500"}
+
+![](images/git_merge_2.png){.fragment width="1200" height="500"}
+:::
+
+## Fast-forward merge
+
+````{.bash code-line-numbers="|1-7|9-14|16-20|22-27|29-32|34-38"}
+# preparation
+$ mkdir git_merge_test && cd $_
+$ git init
+$ git commit --allow-empty -m "Initial Commit"
+[main (root-commit) 2b11fd0] Initial Commit
+$ git commit --allow-empty -m "This is where main stays"
+[main b456283] This is where main stays
+
+$ git checkout -b footer
+Switched to a new branch 'footer'
+$ git commit --allow-empty -m "footer: one step ahead of main"
+[footer a7193f3] footer: one step ahead of main
+$ git commit --allow-empty -m "footer: newnew"
+[footer ee4f1bd] footer: newnew
+
+$ git log --oneline
+ee4f1bd (HEAD -> footer) footer: newnew
+a7193f3 footer: one step ahead of main
+b456283 (main) This is where main stays
+2b11fd0 Initial Commit
+
+$ git checkout main
+Switched to branch 'main'
+
+$ git log --oneline
+b456283 (HEAD -> main) This is where main stays
+2b11fd0 Initial Commit
+
+# merge
+$ git merge footer
+Updating b456283..ee4f1bd
+Fast-forward
+
+$ git log --oneline
+ee4f1bd (HEAD -> main, footer) footer: newnew
+a7193f3 footer: one step ahead of main
+b456283 This is where main stays
+2b11fd0 Initial Commit
+
+````
+
+::: {layout-ncol=2}
+![](images/vscode_graph_fast_forward_merge_prepared.png){.fragment width="500" height="660"}
+
+![](images/vscode_graph_fast_forward_merge.png){.fragment width="540" height="700"}
+:::
+
+
+## Magic merge
+
+::: {.r-stack}
+![](images/git_branch_12.png){.fragment width="1200" height="500"}
+
+![](images/git_merge_3.png){.fragment width="1200" height="500"}
+
+![](images/git_merge_4.png){.fragment width="1200" height="500"}
+
+![](images/git_merge_5.png){.fragment width="1200" height="500"}
+:::
+
+
+## Recursive merge
+
+````{.bash code-line-numbers="|1-7|9-12|14-19|21-24|26-32|34-41"}
+# preparation
+$ mkdir git_recursie_test && cd $_
+$ git init
+$ git commit --allow-empty -m "Initial Commit"
+[main (root-commit) 63055a5] Initial Commit
+$ git commit --allow-empty -m "This is a fork in the road"
+[main dd7166d] This is a fork in the road
+
+$ git commit --allow-empty -m "lonely main first"
+[main c5e8a87] lonely main first
+$ git commit --allow-empty -m "lonely main second"
+[main 2705bec] lonely main second
+
+$ git branch sidebar dd7166d
+$ git checkout sidebar
+Switched to branch 'sidebar'
+$ git log --oneline
+dd7166d (HEAD -> sidebar) This is a fork in the road
+63055a5 Initial Commit
+
+$ git commit --allow-empty -m "lonely sidebar first"
+[sidebar 4282431] lonely sidebar first
+$ git commit --allow-empty -m "lonely sidebar second"
+[sidebar 3a2a110] lonely sidebar second
+
+$ git checkout main
+Switched to branch 'main'
+
+# merge
+$ git merge sidebar
+Already up to date.
+Merge made by the 'recursive' strategy.
+
+$ git log --oneline
+f5fd8f3 (HEAD -> main) Merge branch 'sidebar'
+3a2a110 (sidebar) lonely sidebar second
+4282431 lonely sidebar first
+2705bec lonely main second
+c5e8a87 lonely main first
+dd7166d This is a fork in the road
+63055a5 Initial Commit
+
+````
+
+::: {layout-ncol=2}
+![](images/vscode_graph_recursive_merge_prepared.png){.fragment width="550" height="660"}
+
+![](images/vscode_graph_recursive_merge.png){.fragment width="500" height="660"}
+:::
+

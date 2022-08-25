@@ -554,7 +554,7 @@
 <li>When starting a project with no files…</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">$</span> git status</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="ex">On</span> branch master</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="ex">On</span> branch main</span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="ex">No</span> commits yet</span>
 <span id="cb5-4"><a href="#cb5-4"></a><span class="ex">nothing</span> to commit <span class="er">(</span><span class="ex">create/copy</span> files and use <span class="st">"git add"</span> to track<span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol type="1">
@@ -813,7 +813,7 @@
 <h2>Commit files to a repo</h2>
 <p>Lets see the git status.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="ex">$</span> git status</span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="ex">On</span> branch master</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="ex">On</span> branch main</span>
 <span id="cb18-3"><a href="#cb18-3"></a><span class="ex">nothing</span> to commit, working tree clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br><br> If above steps are done under a cloned repo, you shall see these.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="ex">$</span> git status</span>
@@ -1112,7 +1112,7 @@
 <span id="cb27-8"><a href="#cb27-8"></a>  <span class="ex">sidebar</span></span>
 <span id="cb27-9"><a href="#cb27-9"></a></span>
 <span id="cb27-10"><a href="#cb27-10"></a><span class="ex">$</span> git log <span class="at">--oneline</span></span>
-<span id="cb27-11"><a href="#cb27-11"></a><span class="ex">5246cbe</span> <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> master, sidebar<span class="kw">)</span> <span class="ex">add</span> samples</span>
+<span id="cb27-11"><a href="#cb27-11"></a><span class="ex">5246cbe</span> <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main, sidebar<span class="kw">)</span> <span class="ex">add</span> samples</span>
 <span id="cb27-12"><a href="#cb27-12"></a><span class="ex">a65243c</span> <span class="er">(</span><span class="ex">to_delete</span><span class="kw">)</span> <span class="bu">test</span> commit</span>
 <span id="cb27-13"><a href="#cb27-13"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1148,13 +1148,13 @@
 <h2>What does branch do</h2>
 <p>Let’s play around with branches for a while</p>
 <div class="sourceCode" id="cb30" data-code-line-numbers="1-3|5-12|14,15|17-21"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1"></a><span class="ex">$</span> git branch</span>
-<span id="cb30-2"><a href="#cb30-2"></a><span class="ex">*</span> master</span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="ex">*</span> main</span>
 <span id="cb30-3"><a href="#cb30-3"></a>  <span class="ex">sidebar</span></span>
 <span id="cb30-4"><a href="#cb30-4"></a></span>
 <span id="cb30-5"><a href="#cb30-5"></a><span class="ex">$</span> echo <span class="st">"only on main"</span> <span class="op">&gt;</span> onlyOnMain.txt</span>
 <span id="cb30-6"><a href="#cb30-6"></a></span>
-<span id="cb30-7"><a href="#cb30-7"></a><span class="ex">$</span> git commit <span class="at">-a</span> <span class="at">-m</span> <span class="st">'Things that are only on main branch'</span></span>
-<span id="cb30-8"><a href="#cb30-8"></a><span class="ex">[master</span> 7a24509] Things that are only on main branch</span>
+<span id="cb30-7"><a href="#cb30-7"></a><span class="ex">$</span> git commit <span class="at">-a</span> <span class="at">-m</span> <span class="st">"Things that are only on main branch"</span></span>
+<span id="cb30-8"><a href="#cb30-8"></a><span class="ex">[main</span> 7a24509] Things that are only on main branch</span>
 <span id="cb30-9"><a href="#cb30-9"></a> <span class="ex">1</span> file changed, 1 insertion<span class="er">(</span><span class="ex">+</span><span class="kw">)</span></span>
 <span id="cb30-10"><a href="#cb30-10"></a> <span class="ex">create</span> mode 100644 onlyOnMain.txt</span>
 <span id="cb30-11"><a href="#cb30-11"></a></span>
@@ -1167,6 +1167,135 @@
 <span id="cb30-18"><a href="#cb30-18"></a><span class="ex">$</span> ls <span class="at">-A</span></span>
 <span id="cb30-19"><a href="#cb30-19"></a><span class="ex">.git/</span>  add_something.html  sample.txt  src/</span>
 <span id="cb30-20"><a href="#cb30-20"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="magic-merge" class="slide level2">
+<h2>Magic merge</h2>
+<ul>
+<li><code>git merge</code> Combining branches together.</li>
+<li>There are two main types of merges in Git, a <strong>Fast-forward merge</strong> and a <strong>regular merge</strong>.</li>
+</ul>
+</section>
+<section id="magic-merge-1" class="slide level2">
+<h2>Magic merge</h2>
+<div class="r-stack">
+<p><img data-src="images/git_branch_12.png" class="fragment" width="1200" height="500"></p>
+<p><img data-src="images/git_merge_1.png" class="fragment" width="1200" height="500"></p>
+<p><img data-src="images/git_merge_2.png" class="fragment" width="1200" height="500"></p>
+</div>
+</section>
+<section id="fast-forward-merge" class="slide level2">
+<h2>Fast-forward merge</h2>
+<div class="sourceCode" id="cb31" data-code-line-numbers="|1-7|9-14|16-20|22-27|29-32|34-38"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># preparation</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="ex">$</span> mkdir git_merge_test <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> <span class="va">$_</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="ex">$</span> git init</span>
+<span id="cb31-4"><a href="#cb31-4"></a><span class="ex">$</span> git commit <span class="at">--allow-empty</span> <span class="at">-m</span> <span class="st">"Initial Commit"</span></span>
+<span id="cb31-5"><a href="#cb31-5"></a><span class="ex">[main</span> <span class="er">(</span><span class="ex">root-commit</span><span class="kw">)</span> <span class="ex">2b11fd0]</span> Initial Commit</span>
+<span id="cb31-6"><a href="#cb31-6"></a><span class="ex">$</span> git commit <span class="at">--allow-empty</span> <span class="at">-m</span> <span class="st">"This is where main stays"</span></span>
+<span id="cb31-7"><a href="#cb31-7"></a><span class="ex">[main</span> b456283] This is where main stays</span>
+<span id="cb31-8"><a href="#cb31-8"></a></span>
+<span id="cb31-9"><a href="#cb31-9"></a><span class="ex">$</span> git checkout <span class="at">-b</span> footer</span>
+<span id="cb31-10"><a href="#cb31-10"></a><span class="ex">Switched</span> to a new branch <span class="st">'footer'</span></span>
+<span id="cb31-11"><a href="#cb31-11"></a><span class="ex">$</span> git commit <span class="at">--allow-empty</span> <span class="at">-m</span> <span class="st">"footer: one step ahead of main"</span></span>
+<span id="cb31-12"><a href="#cb31-12"></a><span class="ex">[footer</span> a7193f3] footer: one step ahead of main</span>
+<span id="cb31-13"><a href="#cb31-13"></a><span class="ex">$</span> git commit <span class="at">--allow-empty</span> <span class="at">-m</span> <span class="st">"footer: newnew"</span></span>
+<span id="cb31-14"><a href="#cb31-14"></a><span class="ex">[footer</span> ee4f1bd] footer: newnew</span>
+<span id="cb31-15"><a href="#cb31-15"></a></span>
+<span id="cb31-16"><a href="#cb31-16"></a><span class="ex">$</span> git log <span class="at">--oneline</span></span>
+<span id="cb31-17"><a href="#cb31-17"></a><span class="ex">ee4f1bd</span> <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> footer<span class="kw">)</span> <span class="ex">footer:</span> newnew</span>
+<span id="cb31-18"><a href="#cb31-18"></a><span class="ex">a7193f3</span> footer: one step ahead of main</span>
+<span id="cb31-19"><a href="#cb31-19"></a><span class="ex">b456283</span> <span class="er">(</span><span class="ex">main</span><span class="kw">)</span> <span class="ex">This</span> is where main stays</span>
+<span id="cb31-20"><a href="#cb31-20"></a><span class="ex">2b11fd0</span> Initial Commit</span>
+<span id="cb31-21"><a href="#cb31-21"></a></span>
+<span id="cb31-22"><a href="#cb31-22"></a><span class="ex">$</span> git checkout main</span>
+<span id="cb31-23"><a href="#cb31-23"></a><span class="ex">Switched</span> to branch <span class="st">'main'</span></span>
+<span id="cb31-24"><a href="#cb31-24"></a></span>
+<span id="cb31-25"><a href="#cb31-25"></a><span class="ex">$</span> git log <span class="at">--oneline</span></span>
+<span id="cb31-26"><a href="#cb31-26"></a><span class="ex">b456283</span> <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main<span class="kw">)</span> <span class="ex">This</span> is where main stays</span>
+<span id="cb31-27"><a href="#cb31-27"></a><span class="ex">2b11fd0</span> Initial Commit</span>
+<span id="cb31-28"><a href="#cb31-28"></a></span>
+<span id="cb31-29"><a href="#cb31-29"></a><span class="co"># merge</span></span>
+<span id="cb31-30"><a href="#cb31-30"></a><span class="ex">$</span> git merge footer</span>
+<span id="cb31-31"><a href="#cb31-31"></a><span class="ex">Updating</span> b456283..ee4f1bd</span>
+<span id="cb31-32"><a href="#cb31-32"></a><span class="ex">Fast-forward</span></span>
+<span id="cb31-33"><a href="#cb31-33"></a></span>
+<span id="cb31-34"><a href="#cb31-34"></a><span class="ex">$</span> git log <span class="at">--oneline</span></span>
+<span id="cb31-35"><a href="#cb31-35"></a><span class="ex">ee4f1bd</span> <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main, footer<span class="kw">)</span> <span class="ex">footer:</span> newnew</span>
+<span id="cb31-36"><a href="#cb31-36"></a><span class="ex">a7193f3</span> footer: one step ahead of main</span>
+<span id="cb31-37"><a href="#cb31-37"></a><span class="ex">b456283</span> This is where main stays</span>
+<span id="cb31-38"><a href="#cb31-38"></a><span class="ex">2b11fd0</span> Initial Commit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 48.1%;justify-content: center;">
+<p><img data-src="images/vscode_graph_fast_forward_merge_prepared.png" class="fragment" width="500"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 51.9%;justify-content: center;">
+<p><img data-src="images/vscode_graph_fast_forward_merge.png" class="fragment" width="540"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="magic-merge-2" class="slide level2">
+<h2>Magic merge</h2>
+<div class="r-stack">
+<p><img data-src="images/git_branch_12.png" class="fragment" width="1200" height="500"></p>
+<p><img data-src="images/git_merge_3.png" class="fragment" width="1200" height="500"></p>
+<p><img data-src="images/git_merge_4.png" class="fragment" width="1200" height="500"></p>
+<p><img data-src="images/git_merge_5.png" class="fragment" width="1200" height="500"></p>
+</div>
+</section>
+<section id="recursive-merge" class="slide level2">
+<h2>Recursive merge</h2>
+<div class="sourceCode" id="cb32" data-code-line-numbers="|1-7|9-12|14-19|21-24|26-32|34-41"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># preparation</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="ex">$</span> mkdir git_recursie_test <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> <span class="va">$_</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="ex">$</span> git init</span>
+<span id="cb32-4"><a href="#cb32-4"></a><span class="ex">$</span> git commit <span class="at">--allow-empty</span> <span class="at">-m</span> <span class="st">"Initial Commit"</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a><span class="ex">[main</span> <span class="er">(</span><span class="ex">root-commit</span><span class="kw">)</span> <span class="ex">63055a5]</span> Initial Commit</span>
+<span id="cb32-6"><a href="#cb32-6"></a><span class="ex">$</span> git commit <span class="at">--allow-empty</span> <span class="at">-m</span> <span class="st">"This is a fork in the road"</span></span>
+<span id="cb32-7"><a href="#cb32-7"></a><span class="ex">[main</span> dd7166d] This is a fork in the road</span>
+<span id="cb32-8"><a href="#cb32-8"></a></span>
+<span id="cb32-9"><a href="#cb32-9"></a><span class="ex">$</span> git commit <span class="at">--allow-empty</span> <span class="at">-m</span> <span class="st">"lonely main first"</span></span>
+<span id="cb32-10"><a href="#cb32-10"></a><span class="ex">[main</span> c5e8a87] lonely main first</span>
+<span id="cb32-11"><a href="#cb32-11"></a><span class="ex">$</span> git commit <span class="at">--allow-empty</span> <span class="at">-m</span> <span class="st">"lonely main second"</span></span>
+<span id="cb32-12"><a href="#cb32-12"></a><span class="ex">[main</span> 2705bec] lonely main second</span>
+<span id="cb32-13"><a href="#cb32-13"></a></span>
+<span id="cb32-14"><a href="#cb32-14"></a><span class="ex">$</span> git branch sidebar dd7166d</span>
+<span id="cb32-15"><a href="#cb32-15"></a><span class="ex">$</span> git checkout sidebar</span>
+<span id="cb32-16"><a href="#cb32-16"></a><span class="ex">Switched</span> to branch <span class="st">'sidebar'</span></span>
+<span id="cb32-17"><a href="#cb32-17"></a><span class="ex">$</span> git log <span class="at">--oneline</span></span>
+<span id="cb32-18"><a href="#cb32-18"></a><span class="ex">dd7166d</span> <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> sidebar<span class="kw">)</span> <span class="ex">This</span> is a fork in the road</span>
+<span id="cb32-19"><a href="#cb32-19"></a><span class="ex">63055a5</span> Initial Commit</span>
+<span id="cb32-20"><a href="#cb32-20"></a></span>
+<span id="cb32-21"><a href="#cb32-21"></a><span class="ex">$</span> git commit <span class="at">--allow-empty</span> <span class="at">-m</span> <span class="st">"lonely sidebar first"</span></span>
+<span id="cb32-22"><a href="#cb32-22"></a><span class="ex">[sidebar</span> 4282431] lonely sidebar first</span>
+<span id="cb32-23"><a href="#cb32-23"></a><span class="ex">$</span> git commit <span class="at">--allow-empty</span> <span class="at">-m</span> <span class="st">"lonely sidebar second"</span></span>
+<span id="cb32-24"><a href="#cb32-24"></a><span class="ex">[sidebar</span> 3a2a110] lonely sidebar second</span>
+<span id="cb32-25"><a href="#cb32-25"></a></span>
+<span id="cb32-26"><a href="#cb32-26"></a><span class="ex">$</span> git checkout main</span>
+<span id="cb32-27"><a href="#cb32-27"></a><span class="ex">Switched</span> to branch <span class="st">'main'</span></span>
+<span id="cb32-28"><a href="#cb32-28"></a></span>
+<span id="cb32-29"><a href="#cb32-29"></a><span class="co"># merge</span></span>
+<span id="cb32-30"><a href="#cb32-30"></a><span class="ex">$</span> git merge sidebar</span>
+<span id="cb32-31"><a href="#cb32-31"></a><span class="ex">Already</span> up to date.</span>
+<span id="cb32-32"><a href="#cb32-32"></a><span class="ex">Merge</span> made by the <span class="st">'recursive'</span> strategy.</span>
+<span id="cb32-33"><a href="#cb32-33"></a></span>
+<span id="cb32-34"><a href="#cb32-34"></a><span class="ex">$</span> git log <span class="at">--oneline</span></span>
+<span id="cb32-35"><a href="#cb32-35"></a><span class="ex">f5fd8f3</span> <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main<span class="kw">)</span> <span class="ex">Merge</span> branch <span class="st">'sidebar'</span></span>
+<span id="cb32-36"><a href="#cb32-36"></a><span class="ex">3a2a110</span> <span class="er">(</span><span class="ex">sidebar</span><span class="kw">)</span> <span class="ex">lonely</span> sidebar second</span>
+<span id="cb32-37"><a href="#cb32-37"></a><span class="ex">4282431</span> lonely sidebar first</span>
+<span id="cb32-38"><a href="#cb32-38"></a><span class="ex">2705bec</span> lonely main second</span>
+<span id="cb32-39"><a href="#cb32-39"></a><span class="ex">c5e8a87</span> lonely main first</span>
+<span id="cb32-40"><a href="#cb32-40"></a><span class="ex">dd7166d</span> This is a fork in the road</span>
+<span id="cb32-41"><a href="#cb32-41"></a><span class="ex">63055a5</span> Initial Commit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 52.4%;justify-content: center;">
+<p><img data-src="images/vscode_graph_recursive_merge_prepared.png" class="fragment" width="550"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 47.6%;justify-content: center;">
+<p><img data-src="images/vscode_graph_recursive_merge.png" class="fragment" width="500"></p>
+</div>
+</div>
+</div>
 <div class="footer footer-default">
 
 </div>
