@@ -1173,6 +1173,7 @@
 <ul>
 <li><code>git merge</code> Combining branches together.</li>
 <li>There are two main types of merges in Git, a <strong>Fast-forward merge</strong> and a <strong>regular merge</strong>.</li>
+<li>Sometimes a merge is performed and fails, that is called a merge conflict</li>
 </ul>
 </section>
 <section id="magic-merge-1" class="slide level2">
@@ -1293,6 +1294,130 @@
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 47.6%;justify-content: center;">
 <p><img data-src="images/vscode_graph_recursive_merge.png" class="fragment" width="500"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="merge-conflicts" class="slide level2">
+<h2>Merge conflicts</h2>
+<ul>
+<li>If a merge conflict does occur, Git will try to combine as much as it can, but then it will leave special markers (e.g.&nbsp;<span style="background-color: LightGray">&gt;&gt;&gt;</span> and <span style="background-color: LightGray">&lt;&lt;&lt;</span>) that tell you where you needs to manually fix.</li>
+<li>Git tracks <em>lines</em> in files. A merge conflict will happen when the exact same line(s) are changed in separate branches.</li>
+</ul>
+</section>
+<section id="merge-conflicts-1" class="slide level2">
+<h2>Merge conflicts</h2>
+<div class="sourceCode" id="cb33" data-code-line-numbers="|1-13|15-18|20-26|28-31|44-52|55,67-75|77-81|83-94|96-104"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># prepare</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a><span class="ex">$</span> mkdir git_conflict_test <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> <span class="va">$_</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a><span class="ex">$</span> git init</span>
+<span id="cb33-4"><a href="#cb33-4"></a><span class="ex">$</span> echo <span class="at">-e</span> <span class="st">"Hello World \nsecond line \nWhatever third line"</span> <span class="op">&gt;&gt;</span> greetings.txt</span>
+<span id="cb33-5"><a href="#cb33-5"></a><span class="ex">$</span> cat greetings.txt</span>
+<span id="cb33-6"><a href="#cb33-6"></a><span class="ex">Hello</span> World</span>
+<span id="cb33-7"><a href="#cb33-7"></a><span class="ex">second</span> line</span>
+<span id="cb33-8"><a href="#cb33-8"></a><span class="ex">Whatever</span> third line</span>
+<span id="cb33-9"><a href="#cb33-9"></a></span>
+<span id="cb33-10"><a href="#cb33-10"></a><span class="ex">$</span> git commit <span class="at">-a</span> <span class="at">-m</span> <span class="st">"base greeting points to here"</span></span>
+<span id="cb33-11"><a href="#cb33-11"></a><span class="ex">[master</span> <span class="er">(</span><span class="ex">root-commit</span><span class="kw">)</span> <span class="ex">162b7bf]</span> base greeting points to here</span>
+<span id="cb33-12"><a href="#cb33-12"></a> <span class="ex">1</span> file changed, 3 insertions<span class="er">(</span><span class="ex">+</span><span class="kw">)</span></span>
+<span id="cb33-13"><a href="#cb33-13"></a> <span class="ex">create</span> mode 100644 greetings.txt</span>
+<span id="cb33-14"><a href="#cb33-14"></a></span>
+<span id="cb33-15"><a href="#cb33-15"></a><span class="ex">$</span> sed <span class="at">-i</span> <span class="st">'s/whatever third line/main is the best/'</span> greetings.txt <span class="co"># modified main</span></span>
+<span id="cb33-16"><a href="#cb33-16"></a><span class="ex">$</span> git commit <span class="at">-a</span> <span class="at">-m</span> <span class="st">"changed third line for main"</span></span>
+<span id="cb33-17"><a href="#cb33-17"></a><span class="ex">[master</span> 74cd2d6] changed third line for main</span>
+<span id="cb33-18"><a href="#cb33-18"></a> <span class="ex">1</span> file changed, 1 insertion<span class="er">(</span><span class="ex">+</span><span class="kw">)</span><span class="ex">,</span> 1 deletion<span class="er">(</span><span class="ex">-</span><span class="kw">)</span></span>
+<span id="cb33-19"><a href="#cb33-19"></a></span>
+<span id="cb33-20"><a href="#cb33-20"></a><span class="ex">$</span> git branch competitor 162b7</span>
+<span id="cb33-21"><a href="#cb33-21"></a><span class="ex">$</span> git branch</span>
+<span id="cb33-22"><a href="#cb33-22"></a>  <span class="ex">competitor</span></span>
+<span id="cb33-23"><a href="#cb33-23"></a><span class="ex">*</span> master</span>
+<span id="cb33-24"><a href="#cb33-24"></a><span class="ex">$</span> git log <span class="at">--oneline</span></span>
+<span id="cb33-25"><a href="#cb33-25"></a><span class="ex">74cd2d6</span> <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> master<span class="kw">)</span> <span class="ex">changed</span> third line for main</span>
+<span id="cb33-26"><a href="#cb33-26"></a><span class="ex">162b7bf</span> <span class="er">(</span><span class="ex">competitor</span><span class="kw">)</span> <span class="ex">base</span> greeting points to here</span>
+<span id="cb33-27"><a href="#cb33-27"></a></span>
+<span id="cb33-28"><a href="#cb33-28"></a><span class="ex">$</span> sed <span class="at">-i</span> <span class="st">'s/whatever third line/No, I'</span>m the best = =/<span class="st">' greetings.txt # modified competitor</span></span>
+<span id="cb33-29"><a href="#cb33-29"></a><span class="st">$ git commit -a -m "changed third line for competitor"</span></span>
+<span id="cb33-30"><a href="#cb33-30"></a><span class="st">[competitor 182183d] changed third line for competitor</span></span>
+<span id="cb33-31"><a href="#cb33-31"></a><span class="st"> 1 file changed, 1 insertion(+), 1 deletion(-)</span></span>
+<span id="cb33-32"><a href="#cb33-32"></a></span>
+<span id="cb33-33"><a href="#cb33-33"></a><span class="st"># verify competitor changes</span></span>
+<span id="cb33-34"><a href="#cb33-34"></a><span class="st">$ git log --oneline</span></span>
+<span id="cb33-35"><a href="#cb33-35"></a><span class="st">182183d (HEAD -&gt; competitor) changed third line for competitor</span></span>
+<span id="cb33-36"><a href="#cb33-36"></a><span class="st">162b7bf base greeting points to here</span></span>
+<span id="cb33-37"><a href="#cb33-37"></a><span class="st">$ git show 182183d</span></span>
+<span id="cb33-38"><a href="#cb33-38"></a><span class="st">commit 182183d28ee25b32e99996ced5f994bb8117aa54 (HEAD -&gt; competitor)</span></span>
+<span id="cb33-39"><a href="#cb33-39"></a><span class="st">Author: Brian Yang &lt;anan0329@yahoo.com.tw&gt;</span></span>
+<span id="cb33-40"><a href="#cb33-40"></a><span class="st">Date:   Fri Aug 26 04:09:24 2022 +0800</span></span>
+<span id="cb33-41"><a href="#cb33-41"></a></span>
+<span id="cb33-42"><a href="#cb33-42"></a><span class="st">    changed third line for competitor</span></span>
+<span id="cb33-43"><a href="#cb33-43"></a></span>
+<span id="cb33-44"><a href="#cb33-44"></a><span class="st">diff --git a/greetings.txt b/greetings.txt</span></span>
+<span id="cb33-45"><a href="#cb33-45"></a><span class="st">index 0fde4b1..92446e9 100644</span></span>
+<span id="cb33-46"><a href="#cb33-46"></a><span class="st">--- a/greetings.txt</span></span>
+<span id="cb33-47"><a href="#cb33-47"></a><span class="st">+++ b/greetings.txt</span></span>
+<span id="cb33-48"><a href="#cb33-48"></a><span class="st">@@ -1,3 +1,3 @@</span></span>
+<span id="cb33-49"><a href="#cb33-49"></a><span class="st"> Hello World</span></span>
+<span id="cb33-50"><a href="#cb33-50"></a><span class="st"> second line</span></span>
+<span id="cb33-51"><a href="#cb33-51"></a><span class="st">-Whatever third line</span></span>
+<span id="cb33-52"><a href="#cb33-52"></a><span class="st">+No, I'</span>m the best = =</span>
+<span id="cb33-53"><a href="#cb33-53"></a></span>
+<span id="cb33-54"><a href="#cb33-54"></a><span class="co"># verify main changes</span></span>
+<span id="cb33-55"><a href="#cb33-55"></a><span class="ex">$</span> git checkout master</span>
+<span id="cb33-56"><a href="#cb33-56"></a><span class="ex">Switched</span> to branch <span class="st">'master'</span></span>
+<span id="cb33-57"><a href="#cb33-57"></a><span class="ex">$</span> git log <span class="at">--oneline</span></span>
+<span id="cb33-58"><a href="#cb33-58"></a><span class="ex">74cd2d6</span> <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> master<span class="kw">)</span> <span class="ex">changed</span> third line for main</span>
+<span id="cb33-59"><a href="#cb33-59"></a><span class="ex">162b7bf</span> base greeting points to here</span>
+<span id="cb33-60"><a href="#cb33-60"></a><span class="ex">$</span> git show 74cd2d6</span>
+<span id="cb33-61"><a href="#cb33-61"></a><span class="ex">commit</span> 74cd2d61cabe554362b8645c70a212be5cb37e43 <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> master<span class="kw">)</span></span>
+<span id="cb33-62"><a href="#cb33-62"></a><span class="ex">Author:</span> Brian Yang <span class="op">&lt;</span>anan0329@yahoo.com.tw<span class="op">&gt;</span></span>
+<span id="cb33-63"><a href="#cb33-63"></a><span class="ex">Date:</span>   Fri Aug 26 04:06:39 2022 +0800</span>
+<span id="cb33-64"><a href="#cb33-64"></a></span>
+<span id="cb33-65"><a href="#cb33-65"></a>    <span class="ex">changed</span> third line for main</span>
+<span id="cb33-66"><a href="#cb33-66"></a></span>
+<span id="cb33-67"><a href="#cb33-67"></a><span class="fu">diff</span> <span class="at">--git</span> a/greetings.txt b/greetings.txt</span>
+<span id="cb33-68"><a href="#cb33-68"></a><span class="ex">index</span> 0fde4b1..d02fe9a 100644</span>
+<span id="cb33-69"><a href="#cb33-69"></a><span class="ex">---</span> a/greetings.txt</span>
+<span id="cb33-70"><a href="#cb33-70"></a><span class="ex">+++</span> b/greetings.txt</span>
+<span id="cb33-71"><a href="#cb33-71"></a><span class="ex">@@</span> <span class="at">-1,3</span> +1,3 @@</span>
+<span id="cb33-72"><a href="#cb33-72"></a> <span class="ex">Hello</span> World</span>
+<span id="cb33-73"><a href="#cb33-73"></a> <span class="ex">second</span> line</span>
+<span id="cb33-74"><a href="#cb33-74"></a><span class="ex">-Whatever</span> third line</span>
+<span id="cb33-75"><a href="#cb33-75"></a><span class="ex">+main</span> is the best</span>
+<span id="cb33-76"><a href="#cb33-76"></a></span>
+<span id="cb33-77"><a href="#cb33-77"></a><span class="co"># merge, found conflicts</span></span>
+<span id="cb33-78"><a href="#cb33-78"></a><span class="ex">$</span> git merge competitor</span>
+<span id="cb33-79"><a href="#cb33-79"></a><span class="ex">Auto-merging</span> greetings.txt</span>
+<span id="cb33-80"><a href="#cb33-80"></a><span class="ex">CONFLICT</span> <span class="er">(</span><span class="ex">content</span><span class="kw">)</span><span class="bu">:</span> Merge conflict in greetings.txt</span>
+<span id="cb33-81"><a href="#cb33-81"></a><span class="ex">Automatic</span> merge failed<span class="kw">;</span> <span class="ex">fix</span> conflicts and then commit the result.</span>
+<span id="cb33-82"><a href="#cb33-82"></a></span>
+<span id="cb33-83"><a href="#cb33-83"></a><span class="co"># checkout status for more information</span></span>
+<span id="cb33-84"><a href="#cb33-84"></a><span class="ex">$</span> git status</span>
+<span id="cb33-85"><a href="#cb33-85"></a><span class="ex">On</span> branch master</span>
+<span id="cb33-86"><a href="#cb33-86"></a><span class="ex">You</span> have unmerged paths.</span>
+<span id="cb33-87"><a href="#cb33-87"></a>  <span class="kw">(</span><span class="ex">fix</span> conflicts and run <span class="st">"git commit"</span><span class="kw">)</span></span>
+<span id="cb33-88"><a href="#cb33-88"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git merge --abort"</span> to abort the merge<span class="kw">)</span></span>
+<span id="cb33-89"><a href="#cb33-89"></a></span>
+<span id="cb33-90"><a href="#cb33-90"></a><span class="ex">Unmerged</span> paths:</span>
+<span id="cb33-91"><a href="#cb33-91"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git add &lt;file&gt;..."</span> to mark resolution<span class="kw">)</span></span>
+<span id="cb33-92"><a href="#cb33-92"></a>        <span class="ex">both</span> modified:   greetings.txt</span>
+<span id="cb33-93"><a href="#cb33-93"></a></span>
+<span id="cb33-94"><a href="#cb33-94"></a><span class="ex">no</span> changes added to commit <span class="er">(</span><span class="ex">use</span> <span class="st">"git add"</span> and/or <span class="st">"git commit -a"</span><span class="kw">)</span></span>
+<span id="cb33-95"><a href="#cb33-95"></a></span>
+<span id="cb33-96"><a href="#cb33-96"></a><span class="co"># decided final result at code editor and commit.</span></span>
+<span id="cb33-97"><a href="#cb33-97"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"main wins the game"</span></span>
+<span id="cb33-98"><a href="#cb33-98"></a><span class="ex">[master</span> 1a995d3] main wins the game</span>
+<span id="cb33-99"><a href="#cb33-99"></a></span>
+<span id="cb33-100"><a href="#cb33-100"></a><span class="ex">$</span> git log <span class="at">--oneline</span></span>
+<span id="cb33-101"><a href="#cb33-101"></a><span class="ex">1a995d3</span> <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> master<span class="kw">)</span> <span class="ex">main</span> wins the game</span>
+<span id="cb33-102"><a href="#cb33-102"></a><span class="ex">182183d</span> <span class="er">(</span><span class="ex">competitor</span><span class="kw">)</span> <span class="ex">changed</span> third line for competitor</span>
+<span id="cb33-103"><a href="#cb33-103"></a><span class="ex">74cd2d6</span> changed third line for main</span>
+<span id="cb33-104"><a href="#cb33-104"></a><span class="ex">162b7bf</span> base greeting points to here</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 36.7%;justify-content: center;">
+<p><img data-src="images/vscode_conflict_text.jpg" class="fragment" width="360"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 63.3%;justify-content: center;">
+<p><img data-src="images/vscode_conflict_merge.png" class="fragment" width="620"></p>
 </div>
 </div>
 </div>
