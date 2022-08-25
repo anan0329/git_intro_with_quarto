@@ -582,3 +582,66 @@ index 6092425..2e09960 100644
 -origin
 +modified
 ````
+
+## Some file to be ignored
+
+- A gitignore file specifies intentionally untracked files that Git should ignore, such as S3 bucket access key, .Rhistory, and \__pycache__/
+- Files already tracked by Git are not affected.
+- [A collection of .gitignore templates](https://github.com/github/gitignore) 
+
+````{.bash code-line-numbers="|2,14-16|20|32-34"}
+$ ls -A
+.git/ git_intro.html git_intro.qmd git_intro_files/ images/ powerpoint.pptx readme.md theme/
+
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   git_intro.html
+        modified:   git_intro.qmd
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        powerpoint.pptx
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+$ echo "powerpoint.pptx" > .gitignore
+
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   git_intro.html
+        modified:   git_intro.qmd
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .gitignore
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+````
+
+## Multiple files to be ignored
+
+> What if there are plenty of files to ignore?
+
+<!-- . . . -->
+
+> Globbing is what you need!
+
+Some useful wildcards:
+
+- [*]{style="background-color: LightGray"}  matches 0 or more characters, 
+  + [images/*.jpg]{style="background-color: LightGray"} matches jpg files in images folder
+- [?]{style="background-color: LightGray"}  matches 1 character
+- [[abc]]{style="background-color: LightGray"}  matches a, b, _or_ c
+- [**]{style="background-color: LightGray"}  matches nested directories.
+  + [a/**/z]{style="background-color: LightGray"} matches [a/z]{style="background-color: LightGray"}, [a/b/z]{style="background-color: LightGray"}, [a/b/c/z]{style="background-color: LightGray"}

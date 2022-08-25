@@ -933,9 +933,76 @@
 <span id="cb20-9"><a href="#cb20-9"></a><span class="ex">@@</span> <span class="at">-1</span> +1 @@</span>
 <span id="cb20-10"><a href="#cb20-10"></a><span class="ex">-origin</span></span>
 <span id="cb20-11"><a href="#cb20-11"></a><span class="ex">+modified</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="some-file-to-be-ignored" class="slide level2">
+<h2>Some file to be ignored</h2>
+<ul>
+<li>A gitignore file specifies intentionally untracked files that Git should ignore, such as S3 bucket access key, .Rhistory, and __pycache__/</li>
+<li>Files already tracked by Git are not affected.</li>
+<li><a href="https://github.com/github/gitignore">A collection of .gitignore templates</a></li>
+</ul>
+<div class="sourceCode" id="cb21" data-code-line-numbers="|2,14-16|20|32-34"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1"></a><span class="ex">$</span> ls <span class="at">-A</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="ex">.git/</span> git_intro.html git_intro.qmd git_intro_files/ images/ powerpoint.pptx readme.md theme/</span>
+<span id="cb21-3"><a href="#cb21-3"></a></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="ex">$</span> git status</span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="ex">On</span> branch main</span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="ex">Your</span> branch is up to date with <span class="st">'origin/main'</span>.</span>
+<span id="cb21-7"><a href="#cb21-7"></a></span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="ex">Changes</span> not staged for commit:</span>
+<span id="cb21-9"><a href="#cb21-9"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git add &lt;file&gt;..."</span> to update what will be committed<span class="kw">)</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git restore &lt;file&gt;..."</span> to discard changes in working directory<span class="kw">)</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a>        <span class="ex">modified:</span>   git_intro.html</span>
+<span id="cb21-12"><a href="#cb21-12"></a>        <span class="ex">modified:</span>   git_intro.qmd</span>
+<span id="cb21-13"><a href="#cb21-13"></a></span>
+<span id="cb21-14"><a href="#cb21-14"></a><span class="ex">Untracked</span> files:</span>
+<span id="cb21-15"><a href="#cb21-15"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git add &lt;file&gt;..."</span> to include in what will be committed<span class="kw">)</span></span>
+<span id="cb21-16"><a href="#cb21-16"></a>        <span class="ex">powerpoint.pptx</span></span>
+<span id="cb21-17"><a href="#cb21-17"></a></span>
+<span id="cb21-18"><a href="#cb21-18"></a><span class="ex">no</span> changes added to commit <span class="er">(</span><span class="ex">use</span> <span class="st">"git add"</span> and/or <span class="st">"git commit -a"</span><span class="kw">)</span></span>
+<span id="cb21-19"><a href="#cb21-19"></a></span>
+<span id="cb21-20"><a href="#cb21-20"></a><span class="ex">$</span> echo <span class="st">"powerpoint.pptx"</span> <span class="op">&gt;</span> .gitignore</span>
+<span id="cb21-21"><a href="#cb21-21"></a></span>
+<span id="cb21-22"><a href="#cb21-22"></a><span class="ex">$</span> git status</span>
+<span id="cb21-23"><a href="#cb21-23"></a><span class="ex">On</span> branch main</span>
+<span id="cb21-24"><a href="#cb21-24"></a><span class="ex">Your</span> branch is up to date with <span class="st">'origin/main'</span>.</span>
+<span id="cb21-25"><a href="#cb21-25"></a></span>
+<span id="cb21-26"><a href="#cb21-26"></a><span class="ex">Changes</span> not staged for commit:</span>
+<span id="cb21-27"><a href="#cb21-27"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git add &lt;file&gt;..."</span> to update what will be committed<span class="kw">)</span></span>
+<span id="cb21-28"><a href="#cb21-28"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git restore &lt;file&gt;..."</span> to discard changes in working directory<span class="kw">)</span></span>
+<span id="cb21-29"><a href="#cb21-29"></a>        <span class="ex">modified:</span>   git_intro.html</span>
+<span id="cb21-30"><a href="#cb21-30"></a>        <span class="ex">modified:</span>   git_intro.qmd</span>
+<span id="cb21-31"><a href="#cb21-31"></a></span>
+<span id="cb21-32"><a href="#cb21-32"></a><span class="ex">Untracked</span> files:</span>
+<span id="cb21-33"><a href="#cb21-33"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git add &lt;file&gt;..."</span> to include in what will be committed<span class="kw">)</span></span>
+<span id="cb21-34"><a href="#cb21-34"></a>        <span class="ex">.gitignore</span></span>
+<span id="cb21-35"><a href="#cb21-35"></a></span>
+<span id="cb21-36"><a href="#cb21-36"></a><span class="ex">no</span> changes added to commit <span class="er">(</span><span class="ex">use</span> <span class="st">"git add"</span> and/or <span class="st">"git commit -a"</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="multiple-files-to-be-ignored" class="slide level2">
+<h2>Multiple files to be ignored</h2>
+<blockquote>
+<p>What if there are plenty of files to ignore?</p>
+</blockquote>
+<!-- . . . -->
+<blockquote>
+<p>Globbing is what you need!</p>
+</blockquote>
+<p>Some useful wildcards:</p>
+<ul>
+<li><span style="background-color: LightGray">*</span> matches 0 or more characters,
+<ul>
+<li><span style="background-color: LightGray">images/*.jpg</span> matches jpg files in images folder</li>
+</ul></li>
+<li><span style="background-color: LightGray">?</span> matches 1 character</li>
+<li><span style="background-color: LightGray">[abc]</span> matches a, b, <em>or</em> c</li>
+<li><span style="background-color: LightGray">**</span> matches nested directories.
+<ul>
+<li><span style="background-color: LightGray">a/**/z</span> matches <span style="background-color: LightGray">a/z</span>, <span style="background-color: LightGray">a/b/z</span>, <span style="background-color: LightGray">a/b/c/z</span></li>
+</ul></li>
+</ul>
 <div class="footer footer-default">
 
-</div>
 </div>
 </section>
     </div>
