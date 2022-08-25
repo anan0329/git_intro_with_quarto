@@ -738,10 +738,178 @@
 </div>
 </div>
 </section>
-<section id="add-commits-to-a-repo" class="slide level2">
-<h2>Add commits to a repo</h2>
+<section id="add-files-to-a-repo" class="slide level2">
+<h2>Add files to a repo</h2>
+<p>So, we’ve seen a lot commands to keep track of a Git repo. Now its time to add something to commit.</p>
+<ol type="1">
+<li>Clean repo</li>
+</ol>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="ex">$</span> git status</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="ex">On</span> branch main</span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="ex">Your</span> branch is up to date with <span class="st">'origin/main'</span>.</span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="ex">nothing</span> to commit, working tree clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>Add a html file of “hello world”, a empty src folder</li>
+</ol>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="ex">$</span> echo <span class="st">"hello world"</span> <span class="op">&gt;</span> add_something.html</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="ex">$</span> git status</span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="ex">...</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="ex">Untracked</span> files:</span>
+<span id="cb15-5"><a href="#cb15-5"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git add &lt;file&gt;..."</span> to include in what will be committed<span class="kw">)</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a>        <span class="ex">add_something.html</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>        <span class="ex">src/</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a></span>
+<span id="cb15-9"><a href="#cb15-9"></a><span class="ex">nothing</span> added to commit but untracked files present <span class="er">(</span><span class="ex">use</span> <span class="st">"git add"</span> to track<span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><span style="background-color: LightGray">Untracked files</span> says there are two untracked files in the working tree.</li>
+<li><code>git add</code> is used to move files from working tree to staging area</li>
+</ul>
+</section>
+<section id="add-files-to-a-repo-1" class="slide level2">
+<h2>Add files to a repo</h2>
+<ol start="3" type="1">
+<li>Use <code>git add</code> to add files to stagin area. You can add all files once using <code>git add .</code> (be careful)</li>
+</ol>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="ex">$</span> git add add_something.html</span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="ex">$</span> git status</span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="ex">...</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="ex">Changes</span> to be committed:</span>
+<span id="cb16-5"><a href="#cb16-5"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git restore --staged &lt;file&gt;..."</span> to unstage<span class="kw">)</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a>        <span class="ex">new</span> file:   add_something.html</span>
+<span id="cb16-7"><a href="#cb16-7"></a></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="ex">Untracked</span> files:</span>
+<span id="cb16-9"><a href="#cb16-9"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git add &lt;file&gt;..."</span> to include in what will be committed<span class="kw">)</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a>        <span class="ex">src/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><span style="background-color: LightGray">Changes to be committed</span> displays files that are in the <span style="background-color: LightGray">staging area</span></li>
+<li>If we make a commit right now, only the <em>add_something.html</em> would be committed since it is tracked.</li>
+</ul>
+<div class="callout callout-tip callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>(use “git restore –staged …” to unstage)</strong> if you accidently ran <span style="background-color: LightGray">git add</span> and gave it the wrong file.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="commit-files-to-a-repo" class="slide level2">
+<h2>Commit files to a repo</h2>
+<p>To make a commit in Git, use <code>git commit -m &lt;Your comment&gt;</code> command.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"Initial commit"</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="ex">[main</span> cca3428] Initial commit</span>
+<span id="cb17-3"><a href="#cb17-3"></a> <span class="ex">2</span> files changed, 2 insertions<span class="er">(</span><span class="ex">+</span><span class="kw">)</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a> <span class="ex">create</span> mode 100644 add_something.html</span>
+<span id="cb17-5"><a href="#cb17-5"></a> <span class="ex">create</span> mode 100644 src/myfun.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If setted code editor before, running <span style="background-color: LightGray">git commit</span> will pop up something like this in your editor. Type some text, save it, and close the editor window also do the work.</p>
+
+<img data-src="images/git_commit.png" class="r-stretch"></section>
+<section id="commit-files-to-a-repo-1" class="slide level2">
+<h2>Commit files to a repo</h2>
+<p>Lets see the git status.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="ex">$</span> git status</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="ex">On</span> branch master</span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="ex">nothing</span> to commit, working tree clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><br><br> If above steps are done under a cloned repo, you shall see these.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="ex">$</span> git status</span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="ex">On</span> branch main</span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="ex">Your</span> branch is ahead of <span class="st">'origin/main'</span> by 1 commit.</span>
+<span id="cb19-4"><a href="#cb19-4"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git push"</span> to publish your local commits<span class="kw">)</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a></span>
+<span id="cb19-6"><a href="#cb19-6"></a><span class="ex">nothing</span> to commit, working tree clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-tip callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>(use “git push” to publish your local commits)</strong> indicates what you should do to push your works to the remote repository.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="good-commit-messages" class="slide level2">
+<h2>Good commit messages</h2>
+<blockquote>
+<p><em>How do I write a good commit message?</em></p>
+</blockquote>
+<p><strong>DO</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;- do keep the message short<br>
+&nbsp;&nbsp;&nbsp;&nbsp;- do explain <em>what</em> the commit does</p>
+<p><strong>Do not</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;- do not explain <em>why</em> or <em>how</em> the changes are made<br>
+&nbsp;&nbsp;&nbsp;&nbsp;- do not use the word “and”, break the changes into separate columns.</p>
+</section>
+<section id="is-the-following-commit-message-good" class="slide level2">
+<h2>Is the following commit message good?</h2>
+<div class="callout callout-note callout-captioned callout-style-simple">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Commit - Update the footer to copyright information</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+<div class="fragment">
+<blockquote>
+<p>Yes, the commit is short. It explains what but not how or why</p>
+</blockquote>
+</div>
+<div class="fragment">
+<div class="callout callout-note callout-captioned callout-style-simple">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Commit - Add a tag to the body</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<blockquote>
+<p>No, the commit should not contain specifics on how the change was made. This information can be found by running <span style="background-color: LightGray">git log -p</span></p>
+</blockquote>
+</div>
+<div class="fragment">
+<div class="callout callout-note callout-captioned callout-style-simple">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Commit - Add changes to text.txt</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<blockquote>
+<p>No, saying the changes have been made is not helpful. Saying <em>what</em> has changed (new content, content being removed, content being altered) to “text.txt”</p>
+</blockquote>
 <div class="footer footer-default">
 
+</div>
 </div>
 </section>
     </div>

@@ -411,4 +411,145 @@ Date:   Thu Aug 25 10:47:39 2022 +0800
 :::
 
 
-## Add commits to a repo
+## Add files to a repo
+
+So, we've seen a lot commands to keep track of a Git repo. Now its time to add something to commit.
+
+1. Clean repo
+````{.bash}
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+nothing to commit, working tree clean
+````
+
+2. Add a html file of "hello world", a empty src folder
+````{.bash}
+$ echo "hello world" > add_something.html
+$ git status
+...
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        add_something.html
+        src/
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+````
+- [Untracked files]{style="background-color: LightGray"} says there are two untracked files in the working tree.
+- `git add` is used to move files from working tree to staging area
+
+## Add files to a repo
+
+3. Use `git add` to add files to stagin area. You can add all files once using `git add .` (be careful) 
+
+```{.bash}
+$ git add add_something.html
+$ git status
+...
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   add_something.html
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        src/
+```
+
+- [Changes to be committed]{style="background-color: LightGray"} displays files that are in the [staging area]{style="background-color: LightGray"}
+- If we make a commit right now, only the *add_something.html* would be committed since it is tracked.
+
+:::{.callout-tip}
+## Tip
+
+**(use "git restore --staged ..." to unstage)** if you accidently ran [git add]{style="background-color: LightGray"} and gave it the wrong file.
+
+:::
+
+## Commit files to a repo
+
+To make a commit in Git, use `git commit -m <Your comment>` command.
+
+````{.bash}
+$ git commit -m "Initial commit"
+[main cca3428] Initial commit
+ 2 files changed, 2 insertions(+)
+ create mode 100644 add_something.html
+ create mode 100644 src/myfun.py
+
+````
+
+If setted code editor before, running [git commit]{style="background-color: LightGray"} will pop up something like this in your editor. Type some text, save it, and close the editor window also do the work.
+
+![](images/git_commit.png)
+
+
+## Commit files to a repo
+
+Lets see the git status.
+
+````{.bash}
+$ git status
+On branch master
+nothing to commit, working tree clean
+````
+
+<br></br>
+If above steps are done under a cloned repo, you shall see these.
+
+````{.bash}
+$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+````
+:::{.callout-tip}
+## Tip
+
+**(use "git push" to publish your local commits)** indicates what you should do to push your works to the remote repository.
+
+:::
+
+## Good commit messages
+
+> *How do I write a good commit message?*
+
+**DO**
+
+|     - do keep the message short
+|     - do explain *what* the commit does
+
+**Do not**
+
+|     - do not explain *why* or *how* the changes are made
+|     - do not use the word "and", break the changes into separate columns.
+
+
+## Is the following commit message good?
+
+:::{.callout-note appearance="simple"}
+## Commit - Update the footer to copyright information
+:::
+. . . 
+
+> Yes, the commit is short. It explains what but not how or why
+
+. . .
+
+:::{.callout-note appearance="simple"}
+## Commit - Add a tag to the body
+:::
+. . . 
+
+> No, the commit should not contain specifics on how the change was made. This information can be found by running [git log -p]{style="background-color: LightGray"}
+
+. . .
+
+:::{.callout-note appearance="simple"}
+## Commit - Add changes to text.txt
+:::
+. . . 
+
+> No, saying the changes have been made is not helpful. Saying *what* has changed (new content, content being removed, content being altered) to "text.txt"
