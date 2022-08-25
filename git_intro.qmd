@@ -176,10 +176,239 @@ Before making any commits or do anything else, the repository needs to actually 
 
 ````{.bash }
 $ git init
-Initialized empty Git repository in C:/Users/user/Documents/git_intro_with_quarto/.git/
+Initialized empty Git repository in C:/Users/Brian/Documents/git_intro_with_quarto/.git/
 
 ````
 
 `git init` command sets up all the necessary files that git will use to keep track of everything. All of these file are stored in a hidden directory called [.git]{style="background-color: LightGray"}, which is th `repo`
 
 ![](images/git_init.png)
+
+
+## Clone a git repo
+
+You found a interesting repo and want to further dive into it, then you make an identical copy to your computer.
+
+![](images/github_clone.png)
+
+````{.bash }
+$ git clone https://github.com/anan0329/git_intro_with_quarto.git
+Cloning into 'git_intro_with_quarto'...
+remote: Enumerating objects: 134, done.
+remote: Counting objects: 100% (134/134), done.
+remote: Compressing objects: 100% (107/107), done.
+remote: Total 134 (delta 21), reused 133 (delta 20), pack-reused 0
+Receiving objects: 100% (134/134), 2.13 MiB | 744.00 KiB/s, done.
+Resolving deltas: 100% (21/21), done.
+
+````
+
+## Check a repo's status
+
+Everytime you works with a project, you should first check the status using `git status`
+
+- When starting a project with no files...
+````{.bash }
+$ git status
+On branch master
+No commits yet
+nothing to commit (create/copy files and use "git add" to track)
+
+````
+1. [On branch main]{style="background-color: LightGray"} - means that Git is on the main(default) branch
+2. [nothing to commit]{style="background-color: LightGray"} - means that there are no pending changes
+
+- When cd to a cloned repo...
+````{.bash }
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+nothing to commit, working tree clean
+
+````
+3. [Your branch is up to date with 'origin/main'.]{style="background-color: LightGray"} - means that the project is in sync with the one we cloned from.
+
+
+## Check a repo's status
+
+- When working along with a project...
+````{.bash}
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   git_intro.qmd
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        images/github_clone.png
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+````
+
+<br></br>
+
+We will cover these new terms later.
+
+
+## Display a repo's comments
+
+After making several commits, or cloning a repository, you'll probably want to look back to see what has happened using `git log`. 
+
+````{.bash}
+$ git log
+commit 890fde39e7ac039a9b585a9e50bb459f0a176b89 (HEAD -> main, origin/main, origin/HEAD)
+Author: Brian Yang <anan0329@yahoo.com.tw>
+Date:   Thu Aug 25 11:23:30 2022 +0800
+
+    add git init description
+
+commit 154a025c63dff3968ab6a6776fe7a4c89a861311
+Author: Brian Yang <anan0329@yahoo.com.tw>
+Date:   Thu Aug 25 10:47:39 2022 +0800
+
+    add empty readme file
+
+...
+
+commit 6a420fbc969f587a3ff76bbcd74947f59c259b8b
+Author: Brian Yang <anan0329@yahoo.com.tw>
+Date:   Sat Aug 20 22:45:10 2022 +0800
+
+    initial commit
+
+    create some folder & files
+
+````
+
+- SHA - 890fde39e7ac039a9b585a9e50bb459f0a176b89
+- HEAD - the pointer to the current branch reference
+- commit message - add git init description
+
+## Display a repo's comments
+
+You can also alter how Git displays the repo's information.
+
+. . .
+
+::: {.panel-tabset}
+
+### oneline
+
+- `--oneline` flag only outputs first 7 SHA, head, and commit messages
+````{.bash}
+$ git log --oneline
+890fde3 (HEAD -> main, origin/main) add git init description
+154a025 add empty readme file
+f1c762a make workflow page & common terms explanation
+232d6ef Demonstrate commit changes
+a6aa8ad version control & setup
+ccd721a format title page with image
+b48c243 set theme format
+1f66364 set format & add title page
+6a420fb initial commit
+
+````
+
+### statistics
+
+- `--stat` flag displays the files that have been changed in the commit, also the number of lines that have been added / deleted
+````{.bash}
+commit ccd721a1b0cc2c839b93effc398c131d3ef0b8cc
+Author: Brian Yang <anan0329@yahoo.com.tw>
+Date:   Sun Aug 21 01:11:15 2022 +0800
+
+    format title page with image
+
+ git_intro.html                                      |   6 ++++--
+ git_intro.qmd                                       |   5 ++++-
+ git_intro_files/libs/revealjs/dist/theme/quarto.css |   4 ++--
+ images/git_nasil_kullanilir_straight.png            | Bin 0 -> 35824 bytes
+ 4 files changed, 10 insertions(+), 5 deletions(-)
+
+commit b48c24300bbad66d6b62ac146a50973cc1a3d0a2
+...
+````
+
+### patch
+
+- `-p` flag displays the actual changes made to a file
+````{.bash}
+commit 232d6ef8a37e957395b0b82b183d2e868fe910cc
+Author: Brian Yang <anan0329@yahoo.com.tw>
+Date:   Sun Aug 21 20:41:04 2022 +0800
+
+    Demonstrate commit changes
+
+diff --git a/git_intro.qmd b/git_intro.qmd
+index 84b4716..4ec5ff6 100644
+--- a/git_intro.qmd
++++ b/git_intro.qmd
+@@ -30,11 +30,14 @@ editor: source
+ - Control **VERSION**
+
+ - A version control system is a software that helps you control / manage different versions of source code.
++:::
++
++. . .
+
+ - Two main types of VCS model:
+   + centralized - all users connect to a central repository <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Apache_Subversion_logo.svg" style="display: inline-block; margin: 0; margin-bottom: -2px; height: 35px;"/></img>
+   + distributed - each user has the entire repository on their machine <img src="https://miro.medium.com/max/766/1*co_1qORNdM0PI1nvCp7Iig.png" style="display: inline-block; margin: 0; margin-bottom: -2px; height: 35px;"/></img> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Mercurial_no_border_logo.svg/800px-Mercurial_no_border_logo.svg.png" style="display: inline-block; margin: 0; margin-bottom: -2px; height: 35px;"/></img>
+-:::
++
+
+
+ ## Setup
+
+...
+````
+
+- `git show` does the same thing
+
+### format
+
+- `--pretty` option changes output format. Some of the arguments are [oneline]{style="background-color: LightGray"}, [short]{style="background-color: LightGray"}, [full]{style="background-color: LightGray"}, and [fuller]{style="background-color: LightGray"}
+
+````{.bash}
+$ git log --pretty=format:"%h - %an, %ar : %s"
+890fde3 - Brian Yang, 4 hours ago : add git init description
+154a025 - Brian Yang, 4 hours ago : add empty readme file
+f1c762a - Brian Yang, 5 hours ago : make workflow page & common terms explanation
+232d6ef - Brian Yang, 4 days ago : Demonstrate commit changes
+a6aa8ad - Brian Yang, 4 days ago : version control & setup
+ccd721a - Brian Yang, 5 days ago : format title page with image
+b48c243 - Brian Yang, 5 days ago : set theme format
+1f66364 - Brian Yang, 5 days ago : set format & add title page
+6a420fb - Brian Yang, 5 days ago : initial commit
+
+````
+
+### limit
+
+- Time limiting options such as `--since` and `--until` with lots of formats, such as [2.weeks]{style="background-color: LightGray"}, ["2022-8-25"]{style="background-color: LightGray"}, [2 years 1 day 3 minutes ago]{style="background-color: LightGray"}
+
+````{.bash}
+$ git log --since=10.hours
+commit 890fde39e7ac039a9b585a9e50bb459f0a176b89 (HEAD -> main, origin/main)
+Author: Brian Yang <anan0329@yahoo.com.tw>
+Date:   Thu Aug 25 11:23:30 2022 +0800
+
+    add git init description
+
+commit 154a025c63dff3968ab6a6776fe7a4c89a861311
+Author: Brian Yang <anan0329@yahoo.com.tw>
+Date:   Thu Aug 25 10:47:39 2022 +0800
+
+    add empty readme file
+
+````
+
+:::
+
+
+## Add commits to a repo
