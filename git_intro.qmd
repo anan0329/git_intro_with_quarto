@@ -1,6 +1,7 @@
 ---
 format: 
   revealjs:
+    # smaller: true
     slide-number: true
     width: 1200
     height: 900
@@ -48,7 +49,7 @@ editor: source
 
 . . . 
 
-````{.bash code-line-numbers="1|2-7|11|15|22|30|39"}
+````{.bash code-line-numbers="|1|2-7|11|15|22|30|39"}
 $ git
 usage: git [--version] [--help] [-C <path>] [-c <name>=<value>]
            [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
@@ -259,7 +260,7 @@ We will cover these new terms later.
 
 After making several commits, or cloning a repository, you'll probably want to look back to see what has happened using `git log`. 
 
-````{.bash}
+````{.bash code-line-numbers="|2-6|2|6"}
 $ git log
 commit 890fde39e7ac039a9b585a9e50bb459f0a176b89 (HEAD -> main, origin/main, origin/HEAD)
 Author: Brian Yang <anan0329@yahoo.com.tw>
@@ -337,7 +338,7 @@ commit b48c24300bbad66d6b62ac146a50973cc1a3d0a2
 ### patch
 
 - `-p` flag displays the actual changes made to a file
-````{.bash}
+````{.bash code-line-numbers="|7|8|9|10|11|12-26"}
 commit 232d6ef8a37e957395b0b82b183d2e868fe910cc
 Author: Brian Yang <anan0329@yahoo.com.tw>
 Date:   Sun Aug 21 20:41:04 2022 +0800
@@ -553,3 +554,31 @@ nothing to commit, working tree clean
 . . . 
 
 > No, saying the changes have been made is not helpful. Saying *what* has changed (new content, content being removed, content being altered) to "text.txt"
+
+
+## Find what changes were made
+
+Imagine a situation. You start working on the next feature to a fantastic project at night, but then go to bed before you actually finish. When you start working the next day, there are uncommitted changes.
+
+- `git status` will tell us what files have been changed, but not those changes actually were.
+- `git log` won't help at this time since the changes aren't committed yet.
+
+. . .
+
+> The `git diff` command is used to find out this information.
+
+. . .
+
+````{.bash}
+$ echo "origin" > sample.txt # origin
+$ git add sample.txt
+$ sed -i 's/origin/modified/' sample.txt # modified
+$ git diff
+diff --git a/sample.txt b/sample.txt
+index 6092425..2e09960 100644
+--- a/sample.txt
++++ b/sample.txt
+@@ -1 +1 @@
+-origin
++modified
+````
