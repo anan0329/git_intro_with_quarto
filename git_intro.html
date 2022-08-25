@@ -751,7 +751,7 @@
 <ol start="2" type="1">
 <li>Add a html file of “hello world”, a empty src folder</li>
 </ol>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="ex">$</span> echo <span class="st">"hello world"</span> <span class="op">&gt;</span> add_something.html</span>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="ex">$</span> echo <span class="st">"hello world"</span> <span class="op">&gt;</span> add_something.html <span class="kw">&amp;&amp;</span> <span class="fu">mkdir</span> src</span>
 <span id="cb15-2"><a href="#cb15-2"></a><span class="ex">$</span> git status</span>
 <span id="cb15-3"><a href="#cb15-3"></a><span class="ex">...</span></span>
 <span id="cb15-4"><a href="#cb15-4"></a><span class="ex">Untracked</span> files:</span>
@@ -984,28 +984,190 @@
 <blockquote>
 <p>What if there are plenty of files to ignore?</p>
 </blockquote>
-<!-- . . . -->
+<div class="fragment">
 <blockquote>
 <p>Globbing is what you need!</p>
 </blockquote>
 <p>Some useful wildcards:</p>
-<ul>
-<li><span style="background-color: LightGray">*</span> matches 0 or more characters,
-<ul>
-<li><span style="background-color: LightGray">images/*.jpg</span> matches jpg files in images folder</li>
-</ul></li>
-<li><span style="background-color: LightGray">?</span> matches 1 character</li>
-<li><span style="background-color: LightGray">[abc]</span> matches a, b, <em>or</em> c</li>
-<li><span style="background-color: LightGray">**</span> matches nested directories.
-<ul>
-<li><span style="background-color: LightGray">a/**/z</span> matches <span style="background-color: LightGray">a/z</span>, <span style="background-color: LightGray">a/b/z</span>, <span style="background-color: LightGray">a/b/c/z</span></li>
-</ul></li>
-</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># ignore all .a files</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="ex">*.a</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="co"># but do track lib.a, even though you're ignoring .a files above</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="ex">!lib.a</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a></span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="co"># only ignore the </span><span class="al">TODO</span><span class="co"> file in the current directory, not subdir/</span><span class="al">TODO</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="ex">/TODO</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a></span>
+<span id="cb22-10"><a href="#cb22-10"></a><span class="co"># ignore all files in any directory named build</span></span>
+<span id="cb22-11"><a href="#cb22-11"></a><span class="ex">build/</span></span>
+<span id="cb22-12"><a href="#cb22-12"></a></span>
+<span id="cb22-13"><a href="#cb22-13"></a><span class="co"># ignore doc/notes.txt, but not doc/server/arch.txt</span></span>
+<span id="cb22-14"><a href="#cb22-14"></a><span class="ex">doc/*.txt</span></span>
+<span id="cb22-15"><a href="#cb22-15"></a></span>
+<span id="cb22-16"><a href="#cb22-16"></a><span class="co"># ignore doc/a_lvr_land_a.csv, but not doc/a_lvr_land_c.csv</span></span>
+<span id="cb22-17"><a href="#cb22-17"></a><span class="ex">doc/a_lvr_land_[ab].csv</span></span>
+<span id="cb22-18"><a href="#cb22-18"></a></span>
+<span id="cb22-19"><a href="#cb22-19"></a><span class="co"># ignore all .pdf files in the doc/ directory and any of its subdirectories</span></span>
+<span id="cb22-20"><a href="#cb22-20"></a><span class="ex">doc/**/*.pdf</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="section" class="slide level2">
-<h2></h2>
+<section id="add-a-tag" class="slide level2">
+<h2>Add a tag</h2>
+<blockquote>
+<p>Now you’ve done a ton of things, it’s time to add a tag to target specific commits.</p>
+</blockquote>
 
-<img data-src="images/git_tag.png" class="r-stretch"><div class="footer footer-default">
+<img data-src="images/git_tag.png" class="r-stretch quarto-figure-left"><div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Add</a></li><li><a href="#tabset-2-2">Show</a></li><li><a href="#tabset-2-3">Delete</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># add tag to the most recent commit</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="ex">$</span> git tag <span class="at">-a</span> v1.0 <span class="at">-m</span> <span class="st">"Ready to commit!"</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="co"># add tag to a specific commit if a SHA is passed</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="ex">$</span> git tag <span class="at">-a</span> v0.1 6a420fb <span class="at">-m</span> <span class="st">"Create project"</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a><span class="ex">$</span> git tag <span class="at">-a</span> v0.2 1f66364 <span class="at">-m</span> <span class="st">"redundant tag"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-2-2">
+<div class="sourceCode" id="cb24" data-code-line-numbers="|1,2,6,7|9-14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1"></a><span class="ex">$</span> git log <span class="at">--oneline</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="ex">5f3e206</span> <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main, tag: v1.0, origin/main<span class="kw">)</span> <span class="ex">Finished</span> intro of making local commit stuffs</span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="ex">a743329</span> Add gitignore introduction</span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="ex">78a2a15</span> Add diff intro <span class="kw">&amp;</span> <span class="ex">minor</span> fix of code-line-numbers to show whole picture <span class="kw">&amp;</span> <span class="ex">add</span> .gitignore file</span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="ex">...</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a><span class="ex">1f66364</span> <span class="er">(</span><span class="ex">tag:</span> v0.2<span class="kw">)</span> <span class="bu">set</span> format <span class="kw">&amp;</span> <span class="ex">add</span> title page</span>
+<span id="cb24-7"><a href="#cb24-7"></a><span class="ex">6a420fb</span> <span class="er">(</span><span class="ex">tag:</span> v0.1<span class="kw">)</span> <span class="ex">initial</span> commit</span>
+<span id="cb24-8"><a href="#cb24-8"></a></span>
+<span id="cb24-9"><a href="#cb24-9"></a><span class="ex">$</span> git show v1.0</span>
+<span id="cb24-10"><a href="#cb24-10"></a><span class="ex">tag</span> v1.0</span>
+<span id="cb24-11"><a href="#cb24-11"></a><span class="ex">Tagger:</span> Brian Yang <span class="op">&lt;</span>anan0329@yahoo.com.tw<span class="op">&gt;</span></span>
+<span id="cb24-12"><a href="#cb24-12"></a><span class="ex">Date:</span>   Thu Aug 25 22:32:19 2022 +0800</span>
+<span id="cb24-13"><a href="#cb24-13"></a></span>
+<span id="cb24-14"><a href="#cb24-14"></a><span class="ex">Ready</span> to commit!</span>
+<span id="cb24-15"><a href="#cb24-15"></a></span>
+<span id="cb24-16"><a href="#cb24-16"></a><span class="ex">commit</span> 5f3e2063f93c315e504a8b6143675883aabb02e7 <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main, tag: v1.0, origin/main<span class="kw">)</span></span>
+<span id="cb24-17"><a href="#cb24-17"></a><span class="ex">Author:</span> Brian Yang <span class="op">&lt;</span>anan0329@yahoo.com.tw<span class="op">&gt;</span></span>
+<span id="cb24-18"><a href="#cb24-18"></a><span class="ex">Date:</span>   Thu Aug 25 22:29:17 2022 +0800</span>
+<span id="cb24-19"><a href="#cb24-19"></a></span>
+<span id="cb24-20"><a href="#cb24-20"></a>    <span class="ex">Finished</span> intro of making local commit stuffs</span>
+<span id="cb24-21"><a href="#cb24-21"></a></span>
+<span id="cb24-22"><a href="#cb24-22"></a><span class="fu">diff</span> <span class="at">--git</span> a/.gitignore b/.gitignore</span>
+<span id="cb24-23"><a href="#cb24-23"></a><span class="ex">index</span> b4c5ba3..c0f7575 100644</span>
+<span id="cb24-24"><a href="#cb24-24"></a><span class="ex">---</span> a/.gitignore</span>
+<span id="cb24-25"><a href="#cb24-25"></a><span class="ex">+++</span> b/.gitignore</span>
+<span id="cb24-26"><a href="#cb24-26"></a><span class="ex">...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-2-3">
+<div class="sourceCode" id="cb25" data-code-line-numbers="1,2|4,9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1"></a><span class="ex">$</span> git tag <span class="at">-d</span> v0.2</span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="ex">Deleted</span> tag <span class="st">'v0.2'</span> <span class="er">(</span><span class="ex">was</span> 0a84c13<span class="kw">)</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a></span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="ex">$</span> git log <span class="at">--oneline</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="ex">5f3e206</span> <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main, tag: v1.0, origin/main<span class="kw">)</span> <span class="ex">Finished</span> intro of making local commit stuffs</span>
+<span id="cb25-6"><a href="#cb25-6"></a><span class="ex">a743329</span> Add gitignore introduction</span>
+<span id="cb25-7"><a href="#cb25-7"></a><span class="ex">78a2a15</span> Add diff intro <span class="kw">&amp;</span> <span class="ex">minor</span> fix of code-line-numbers to show whole picture <span class="kw">&amp;</span> <span class="ex">add</span> .gitignore file</span>
+<span id="cb25-8"><a href="#cb25-8"></a><span class="ex">...</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a><span class="ex">1f66364</span> set format <span class="kw">&amp;</span> <span class="ex">add</span> title page</span>
+<span id="cb25-10"><a href="#cb25-10"></a><span class="ex">6a420fb</span> <span class="er">(</span><span class="ex">tag:</span> v0.1<span class="kw">)</span> <span class="ex">initial</span> commit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="what-does-branch-do" class="slide level2">
+<h2>What does branch do</h2>
+<div class="r-stack">
+<p><img data-src="images/git_branch_1.png" class="fragment" width="1200" height="500"></p>
+<p><img data-src="images/git_branch_2.png" class="fragment" width="1200" height="500"></p>
+<p><img data-src="images/git_branch_3.png" class="fragment" width="1200" height="500"></p>
+<p><img data-src="images/git_branch_4.png" class="fragment" width="1200" height="500"></p>
+<p><img data-src="images/git_branch_5.png" class="fragment" width="1200" height="500"></p>
+<p><img data-src="images/git_branch_6.png" class="fragment" width="1200" height="500"></p>
+<p><img data-src="images/git_branch_7.png" class="fragment" width="1200" height="500"></p>
+<p><img data-src="images/git_branch_8.png" class="fragment" width="1200" height="660"></p>
+<p><img data-src="images/git_branch_9.png" class="fragment" width="1200" height="660"></p>
+<p><img data-src="images/git_branch_10.png" class="fragment" width="1200" height="660"></p>
+<p><img data-src="images/git_branch_11.png" class="fragment" width="1200" height="660"></p>
+<p><img data-src="images/git_branch_12.png" class="fragment" width="1200" height="660"></p>
+</div>
+</section>
+<section id="what-does-branch-do-1" class="slide level2">
+<h2>What does branch do</h2>
+<p><code>git branch</code> command is used to interact with Git’s branches</p>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">list</a></li><li><a href="#tabset-3-2">create</a></li><li><a href="#tabset-3-3">delete</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1"></a><span class="ex">$</span> git branch</span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="ex">*</span> main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>The active branch has an <code>*</code> next to it</li>
+</ul>
+</div>
+<div id="tabset-3-2">
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1"></a><span class="ex">$</span> git branch sidebar</span>
+<span id="cb27-2"><a href="#cb27-2"></a></span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="co"># create the to_delete branch and have it point to the commit with SHA a65243c </span></span>
+<span id="cb27-4"><a href="#cb27-4"></a><span class="ex">$</span> git branch to_delete a65243c</span>
+<span id="cb27-5"><a href="#cb27-5"></a></span>
+<span id="cb27-6"><a href="#cb27-6"></a><span class="ex">$</span> git branch</span>
+<span id="cb27-7"><a href="#cb27-7"></a><span class="ex">*</span> main</span>
+<span id="cb27-8"><a href="#cb27-8"></a>  <span class="ex">sidebar</span></span>
+<span id="cb27-9"><a href="#cb27-9"></a></span>
+<span id="cb27-10"><a href="#cb27-10"></a><span class="ex">$</span> git log <span class="at">--oneline</span></span>
+<span id="cb27-11"><a href="#cb27-11"></a><span class="ex">5246cbe</span> <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> master, sidebar<span class="kw">)</span> <span class="ex">add</span> samples</span>
+<span id="cb27-12"><a href="#cb27-12"></a><span class="ex">a65243c</span> <span class="er">(</span><span class="ex">to_delete</span><span class="kw">)</span> <span class="bu">test</span> commit</span>
+<span id="cb27-13"><a href="#cb27-13"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-3-3">
+<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1"></a><span class="ex">$</span> git branch <span class="at">-d</span> to_delete</span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="ex">Deleted</span> branch to_delete <span class="er">(</span><span class="ex">was</span> a65243c<span class="kw">)</span><span class="bu">.</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a></span>
+<span id="cb28-4"><a href="#cb28-4"></a><span class="ex">$</span> git branch</span>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="ex">*</span> main</span>
+<span id="cb28-6"><a href="#cb28-6"></a>  <span class="ex">sidebar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<ul>
+<li>Even though you created the sidebar branch, it’s not the current branch just yet. We need to switch to it via <code>git checkout</code>.</li>
+</ul>
+<div class="sourceCode" id="cb29" data-code-line-numbers="1-3|5-10|12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1"></a><span class="ex">$</span> git log <span class="at">--oneline</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="ex">5246cbe</span> <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main, sidebar<span class="kw">)</span> <span class="ex">add</span> samples</span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="ex">a65243c</span> test commit</span>
+<span id="cb29-4"><a href="#cb29-4"></a></span>
+<span id="cb29-5"><a href="#cb29-5"></a><span class="ex">$</span> git checkout sidebar</span>
+<span id="cb29-6"><a href="#cb29-6"></a><span class="ex">Switched</span> to branch <span class="st">'sidebar'</span></span>
+<span id="cb29-7"><a href="#cb29-7"></a></span>
+<span id="cb29-8"><a href="#cb29-8"></a><span class="ex">$</span> git log <span class="at">--oneline</span></span>
+<span id="cb29-9"><a href="#cb29-9"></a><span class="ex">5246cbe</span> <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> sidebar, main<span class="kw">)</span> <span class="ex">add</span> samples</span>
+<span id="cb29-10"><a href="#cb29-10"></a><span class="ex">a65243c</span> test commit</span>
+<span id="cb29-11"><a href="#cb29-11"></a></span>
+<span id="cb29-12"><a href="#cb29-12"></a><span class="co"># git checkout -b to_delete creates and changes to_delete all in one command.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="what-does-branch-do-2" class="slide level2">
+<h2>What does branch do</h2>
+<p>Let’s play around with branches for a while</p>
+<div class="sourceCode" id="cb30" data-code-line-numbers="1-3|5-12|14,15|17-21"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1"></a><span class="ex">$</span> git branch</span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="ex">*</span> master</span>
+<span id="cb30-3"><a href="#cb30-3"></a>  <span class="ex">sidebar</span></span>
+<span id="cb30-4"><a href="#cb30-4"></a></span>
+<span id="cb30-5"><a href="#cb30-5"></a><span class="ex">$</span> echo <span class="st">"only on main"</span> <span class="op">&gt;</span> onlyOnMain.txt</span>
+<span id="cb30-6"><a href="#cb30-6"></a></span>
+<span id="cb30-7"><a href="#cb30-7"></a><span class="ex">$</span> git commit <span class="at">-a</span> <span class="at">-m</span> <span class="st">'Things that are only on main branch'</span></span>
+<span id="cb30-8"><a href="#cb30-8"></a><span class="ex">[master</span> 7a24509] Things that are only on main branch</span>
+<span id="cb30-9"><a href="#cb30-9"></a> <span class="ex">1</span> file changed, 1 insertion<span class="er">(</span><span class="ex">+</span><span class="kw">)</span></span>
+<span id="cb30-10"><a href="#cb30-10"></a> <span class="ex">create</span> mode 100644 onlyOnMain.txt</span>
+<span id="cb30-11"><a href="#cb30-11"></a></span>
+<span id="cb30-12"><a href="#cb30-12"></a><span class="ex">$</span> ls <span class="at">-A</span></span>
+<span id="cb30-13"><a href="#cb30-13"></a><span class="ex">.git/</span>  add_something.html  onlyOnMain.txt  sample.txt  src/</span>
+<span id="cb30-14"><a href="#cb30-14"></a></span>
+<span id="cb30-15"><a href="#cb30-15"></a><span class="ex">$</span> git checkout sidebar</span>
+<span id="cb30-16"><a href="#cb30-16"></a><span class="ex">Switched</span> to branch <span class="st">'sidebar'</span></span>
+<span id="cb30-17"><a href="#cb30-17"></a></span>
+<span id="cb30-18"><a href="#cb30-18"></a><span class="ex">$</span> ls <span class="at">-A</span></span>
+<span id="cb30-19"><a href="#cb30-19"></a><span class="ex">.git/</span>  add_something.html  sample.txt  src/</span>
+<span id="cb30-20"><a href="#cb30-20"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="footer footer-default">
 
 </div>
 </section>
@@ -1166,10 +1328,10 @@
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'none',
+        transition: 'slide',
 
         // Transition speed (default/fast/slow)
-        transitionSpeed: 'default',
+        transitionSpeed: 'fast',
 
         // Transition style for full page slide backgrounds
         // (none/fade/slide/convex/concave/zoom)

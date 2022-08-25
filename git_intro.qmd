@@ -6,7 +6,9 @@ format:
     width: 1200
     height: 900
     theme: ["theme/custom.scss"]
+    transition: slide
     background-transition: fade
+    transition-speed: fast
 from: markdown+emoji
 editor: source
 ---
@@ -426,7 +428,7 @@ nothing to commit, working tree clean
 
 2. Add a html file of "hello world", a empty src folder
 ````{.bash}
-$ echo "hello world" > add_something.html
+$ echo "hello world" > add_something.html && mkdir src
 $ git status
 ...
 Untracked files:
@@ -633,20 +635,223 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 > What if there are plenty of files to ignore?
 
-<!-- . . . -->
+. . .
 
 > Globbing is what you need!
 
 Some useful wildcards:
 
-- [*]{style="background-color: LightGray"}  matches 0 or more characters, 
-  + [images/*.jpg]{style="background-color: LightGray"} matches jpg files in images folder
-- [?]{style="background-color: LightGray"}  matches 1 character
-- [[abc]]{style="background-color: LightGray"}  matches a, b, _or_ c
-- [**]{style="background-color: LightGray"}  matches nested directories.
-  + [a/**/z]{style="background-color: LightGray"} matches [a/z]{style="background-color: LightGray"}, [a/b/z]{style="background-color: LightGray"}, [a/b/c/z]{style="background-color: LightGray"}
+````{.bash}
+# ignore all .a files
+*.a
+
+# but do track lib.a, even though you're ignoring .a files above
+!lib.a
+
+# only ignore the TODO file in the current directory, not subdir/TODO
+/TODO
+
+# ignore all files in any directory named build
+build/
+
+# ignore doc/notes.txt, but not doc/server/arch.txt
+doc/*.txt
+
+# ignore doc/a_lvr_land_a.csv, but not doc/a_lvr_land_c.csv
+doc/a_lvr_land_[ab].csv
+
+# ignore all .pdf files in the doc/ directory and any of its subdirectories
+doc/**/*.pdf
+````
 
 
-##
+## Add a tag
 
-![](images/git_tag.png)
+> Now you've done a ton of things, it's time to add a tag to target specific commits.
+
+![](images/git_tag.png){fig-align="left"}
+
+::: {.panel-tabset}
+
+### Add 
+
+````{.bash}
+# add tag to the most recent commit
+$ git tag -a v1.0 -m "Ready to commit!"
+
+# add tag to a specific commit if a SHA is passed
+$ git tag -a v0.1 6a420fb -m "Create project"
+$ git tag -a v0.2 1f66364 -m "redundant tag"
+````
+### Show
+````{.bash code-line-numbers="|1,2,6,7|9-14"}
+$ git log --oneline
+5f3e206 (HEAD -> main, tag: v1.0, origin/main) Finished intro of making local commit stuffs
+a743329 Add gitignore introduction
+78a2a15 Add diff intro & minor fix of code-line-numbers to show whole picture & add .gitignore file
+...
+1f66364 (tag: v0.2) set format & add title page
+6a420fb (tag: v0.1) initial commit
+
+$ git show v1.0
+tag v1.0
+Tagger: Brian Yang <anan0329@yahoo.com.tw>
+Date:   Thu Aug 25 22:32:19 2022 +0800
+
+Ready to commit!
+
+commit 5f3e2063f93c315e504a8b6143675883aabb02e7 (HEAD -> main, tag: v1.0, origin/main)
+Author: Brian Yang <anan0329@yahoo.com.tw>
+Date:   Thu Aug 25 22:29:17 2022 +0800
+
+    Finished intro of making local commit stuffs
+
+diff --git a/.gitignore b/.gitignore
+index b4c5ba3..c0f7575 100644
+--- a/.gitignore
++++ b/.gitignore
+...
+````
+
+### Delete
+````{.bash code-line-numbers="1,2|4,9"}
+$ git tag -d v0.2
+Deleted tag 'v0.2' (was 0a84c13)
+
+$ git log --oneline
+5f3e206 (HEAD -> main, tag: v1.0, origin/main) Finished intro of making local commit stuffs
+a743329 Add gitignore introduction
+78a2a15 Add diff intro & minor fix of code-line-numbers to show whole picture & add .gitignore file
+...
+1f66364 set format & add title page
+6a420fb (tag: v0.1) initial commit
+````
+
+:::
+
+
+## What does branch do
+
+::: {.r-stack}
+![](images/git_branch_1.png){.fragment width="1200" height="500"}
+
+![](images/git_branch_2.png){.fragment width="1200" height="500"}
+
+![](images/git_branch_3.png){.fragment width="1200" height="500"}
+
+![](images/git_branch_4.png){.fragment width="1200" height="500"}
+
+![](images/git_branch_5.png){.fragment width="1200" height="500"}
+
+![](images/git_branch_6.png){.fragment width="1200" height="500"}
+
+![](images/git_branch_7.png){.fragment width="1200" height="500"}
+
+![](images/git_branch_8.png){.fragment width="1200" height="660"}
+
+![](images/git_branch_9.png){.fragment width="1200" height="660"}
+
+![](images/git_branch_10.png){.fragment width="1200" height="660"}
+
+![](images/git_branch_11.png){.fragment width="1200" height="660"}
+
+![](images/git_branch_12.png){.fragment width="1200" height="660"}
+:::
+
+## What does branch do
+
+`git branch` command is used to interact with Git's branches
+
+:::{.panel-tabset}
+
+### list
+
+````{.bash}
+$ git branch
+* main
+
+````
+- The active branch has an `*` next to it
+
+### create
+
+````{.bash}
+$ git branch sidebar
+
+# create the to_delete branch and have it point to the commit with SHA a65243c 
+$ git branch to_delete a65243c
+
+$ git branch
+* main
+  sidebar
+
+$ git log --oneline
+5246cbe (HEAD -> master, sidebar) add samples
+a65243c (to_delete) test commit
+
+
+````
+
+
+### delete
+
+````{.bash}
+$ git branch -d to_delete
+Deleted branch to_delete (was a65243c).
+
+$ git branch
+* main
+  sidebar
+
+````
+
+:::
+
+
+. . . 
+
+- Even though you created the sidebar branch, it's not the current branch just yet. We need to switch to it via `git checkout`.
+
+````{.bash code-line-numbers="1-3|5-10|12"}
+$ git log --oneline
+5246cbe (HEAD -> main, sidebar) add samples
+a65243c test commit
+
+$ git checkout sidebar
+Switched to branch 'sidebar'
+
+$ git log --oneline
+5246cbe (HEAD -> sidebar, main) add samples
+a65243c test commit
+
+# git checkout -b to_delete creates and changes to_delete all in one command.
+
+````
+
+## What does branch do
+
+Let's play around with branches for a while
+
+````{.bash code-line-numbers="1-3|5-12|14,15|17-21"}
+$ git branch
+* master
+  sidebar
+
+$ echo "only on main" > onlyOnMain.txt
+
+$ git commit -a -m 'Things that are only on main branch'
+[master 7a24509] Things that are only on main branch
+ 1 file changed, 1 insertion(+)
+ create mode 100644 onlyOnMain.txt
+
+$ ls -A
+.git/  add_something.html  onlyOnMain.txt  sample.txt  src/
+
+$ git checkout sidebar
+Switched to branch 'sidebar'
+
+$ ls -A
+.git/  add_something.html  sample.txt  src/
+
+
+````
