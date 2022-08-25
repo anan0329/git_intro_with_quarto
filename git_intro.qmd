@@ -6,6 +6,7 @@ format:
     height: 900
     theme: ["theme/custom.scss"]
     background-transition: fade
+from: markdown+emoji
 editor: source
 ---
 
@@ -123,3 +124,62 @@ git config --list
 . . .
 
 [Awesome, let's get started!]{.r-fit-text}
+
+
+## File Workflow
+
+![](images/git_workflow.png)
+
+
+## Some common terms
+
+| `Version Control System`
+|      - Revert project back to a specific previous state
+|      - See who last modified something that caused a problem 😇
+|      - See who introduced an issue
+
+| `Working Tree`
+|      - The files in the computer's file system
+|      - This is contrast to the files that have been saved (in commits)
+|        in the repository
+
+
+| `Staging Area(Index)`
+|      - A file in the git directory that stores info about what will go into your
+|        next commit
+|      - Stores file content in [.git/object]{style="background-color: LightGray"}, updates index file, [.git/index]{style="background-color: LightGray"}
+
+
+## Some common terms
+
+| `Commit`
+|      - snapshot
+|      - Takes a picture of what all your files look like and stores a reference
+
+| `SHA(SHA hash)`
+|      - a 40-character ID number for each comit
+|      - e.g. b48c24300bbad66d6b62ac146a50973cc1a3d0a2
+
+| `Repository(Repo)`
+|      - A directory that contains your project work, [**.git folder**]{style="background-color: LightGray"}
+|      - Can exist locally or as a remote copy on another computer.
+
+| `branch`
+|      - When a new line of development is created that diverges of the main
+|        line of development.
+|      - This alternative line of development can continue without altering
+|        the main line
+
+## Create a git repo
+
+Before making any commits or do anything else, the repository needs to actually exist.
+
+````{.bash }
+$ git init
+Initialized empty Git repository in C:/Users/user/Documents/git_intro_with_quarto/.git/
+
+````
+
+`git init` command sets up all the necessary files that git will use to keep track of everything. All of these file are stored in a hidden directory called [.git]{style="background-color: LightGray"}, which is th `repo`
+
+![](images/git_init.png)

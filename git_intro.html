@@ -400,10 +400,14 @@
 <ul>
 <li class="fragment"><p>Control <strong>VERSION</strong></p></li>
 <li class="fragment"><p>A version control system is a software that helps you control / manage different versions of source code.</p></li>
-<li class="fragment"><p>Two main types of VCS model:</p>
+</ul>
+</div>
+<div class="fragment">
 <ul>
-<li class="fragment">centralized - all users connect to a central repository <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Apache_Subversion_logo.svg" style="display: inline-block; margin: 0; margin-bottom: -2px; height: 35px;"></li>
-<li class="fragment">distributed - each user has the entire repository on their machine <img src="https://miro.medium.com/max/766/1*co_1qORNdM0PI1nvCp7Iig.png" style="display: inline-block; margin: 0; margin-bottom: -2px; height: 35px;"> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Mercurial_no_border_logo.svg/800px-Mercurial_no_border_logo.svg.png" style="display: inline-block; margin: 0; margin-bottom: -2px; height: 35px;"></li>
+<li>Two main types of VCS model:
+<ul>
+<li>centralized - all users connect to a central repository <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Apache_Subversion_logo.svg" style="display: inline-block; margin: 0; margin-bottom: -2px; height: 35px;"></li>
+<li>distributed - each user has the entire repository on their machine <img src="https://miro.medium.com/max/766/1*co_1qORNdM0PI1nvCp7Iig.png" style="display: inline-block; margin: 0; margin-bottom: -2px; height: 35px;"> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Mercurial_no_border_logo.svg/800px-Mercurial_no_border_logo.svg.png" style="display: inline-block; margin: 0; margin-bottom: -2px; height: 35px;"></li>
 </ul></li>
 </ul>
 </div>
@@ -484,9 +488,53 @@
 <span id="cb2-15"><a href="#cb2-15"></a><span class="fu">git</span> config <span class="at">--list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="fragment">
 <p><span class="r-fit-text">Awesome, let’s get started!</span></p>
-<div class="footer footer-default">
-
 </div>
+</section>
+<section id="file-workflow" class="slide level2">
+<h2>File Workflow</h2>
+
+<img data-src="images/git_workflow.png" class="r-stretch"></section>
+<section id="some-common-terms" class="slide level2">
+<h2>Some common terms</h2>
+<p><code>Version Control System</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Revert project back to a specific previous state<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- See who last modified something that caused a problem 😇<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- See who introduced an issue</p>
+<p><code>Working Tree</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- The files in the computer’s file system<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- This is contrast to the files that have been saved (in commits)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in the repository</p>
+<p><code>Staging Area(Index)</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- A file in the git directory that stores info about what will go into your<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;next commit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Stores file content in <span style="background-color: LightGray">.git/object</span>, updates index file, <span style="background-color: LightGray">.git/index</span></p>
+</section>
+<section id="some-common-terms-1" class="slide level2">
+<h2>Some common terms</h2>
+<p><code>Commit</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- snapshot<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Takes a picture of what all your files look like and stores a reference</p>
+<p><code>SHA(SHA hash)</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- a 40-character ID number for each comit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- e.g.&nbsp;b48c24300bbad66d6b62ac146a50973cc1a3d0a2</p>
+<p><code>Repository(Repo)</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- A directory that contains your project work, <span style="background-color: LightGray"><strong>.git folder</strong></span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Can exist locally or as a remote copy on another computer.</p>
+<p><code>branch</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- When a new line of development is created that diverges of the main<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;line of development.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- This alternative line of development can continue without altering<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the main line</p>
+</section>
+<section id="create-a-git-repo" class="slide level2">
+<h2>Create a git repo</h2>
+<p>Before making any commits or do anything else, the repository needs to actually exist.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">$</span> git init</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="ex">Initialized</span> empty Git repository in C:/Users/user/Documents/git_intro_with_quarto/.git/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>git init</code> command sets up all the necessary files that git will use to keep track of everything. All of these file are stored in a hidden directory called <span style="background-color: LightGray">.git</span>, which is th <code>repo</code></p>
+
+<img data-src="images/git_init.png" class="r-stretch"><div class="footer footer-default">
+
 </div>
 </section>
     </div>
