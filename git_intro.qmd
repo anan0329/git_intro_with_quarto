@@ -645,3 +645,8 @@ Some useful wildcards:
 - [[abc]]{style="background-color: LightGray"}  matches a, b, _or_ c
 - [**]{style="background-color: LightGray"}  matches nested directories.
   + [a/**/z]{style="background-color: LightGray"} matches [a/z]{style="background-color: LightGray"}, [a/b/z]{style="background-color: LightGray"}, [a/b/c/z]{style="background-color: LightGray"}
+
+
+##
+
+![](images/git_tag.png)
