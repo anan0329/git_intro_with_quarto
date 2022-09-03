@@ -1,0 +1,6 @@
+project:
+  title: "git_intro_with_quarto"
+  type: website
+  output-dir: docs
+
+
