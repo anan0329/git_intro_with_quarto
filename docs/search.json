@@ -1,0 +1,240 @@
+[
+  {
+    "objectID": "git_intro_with_quarto.html#TitleSlide",
+    "href": "git_intro_with_quarto.html#TitleSlide",
+    "title": "",
+    "section": "",
+    "text": "Version Conrtol with Git\n\nBrian Yang\n2022-08-25\nhttps://github.com/anan0329/git_intro_with_quarto"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#what-is-version-control",
+    "href": "git_intro_with_quarto.html#what-is-version-control",
+    "title": "",
+    "section": "What is version control?",
+    "text": "What is version control?\n\n\nFrom wikipedia: version control (also known as revision control, source control, or source code management) is a class of systems responsible for managing changes to computer programs, documents, large web sites, or other collections of information. Version control is a component of software configuration management\n\n\nControl VERSION\nA version control system is a software that helps you control / manage different versions of source code.\n\n\n\n\nTwo main types of VCS model:\n\ncentralized - all users connect to a central repository \ndistributed - each user has the entire repository on their machine"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#setup",
+    "href": "git_intro_with_quarto.html#setup",
+    "title": "",
+    "section": "Setup",
+    "text": "Setup\n\nInstalling Git: Follow https://git-scm.com/downloads\nOnce installed, run git on the command line to check if it displays the usage information.\n\n\n$ git\nusage: git [--version] [--help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]\n           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]\n           [--super-prefix=<path>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone             Clone a repository into a new directory\n   init              Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add               Add file contents to the index\n   mv                Move or rename a file, a directory, or a symlink\n   restore           Restore working tree files\n   rm                Remove files from the working tree and from the index\n   sparse-checkout   Initialize and modify the sparse-checkout\n\nexamine the history and state (see also: git help revisions)\n   bisect            Use binary search to find the commit that introduced a bug\n   diff              Show changes between commits, commit and working tree, etc\n   grep              Print lines matching a pattern\n   log               Show commit logs\n   show              Show various types of objects\n   status            Show the working tree status\n\ngrow, mark and tweak your common history\n   branch            List, create, or delete branches\n   commit            Record changes to the repository\n   merge             Join two or more development histories together\n   rebase            Reapply commits on top of another base tip\n   reset             Reset current HEAD to the specified state\n   switch            Switch branches\n   tag               Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch             Download objects and refs from another repository\n   pull              Fetch from and integrate with another repository or a local branch\n   push              Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system."
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#setup-1",
+    "href": "git_intro_with_quarto.html#setup-1",
+    "title": "",
+    "section": "Setup",
+    "text": "Setup\nFirst time Git configuration\n# Tells Git your name\ngit config --global user.name \"<Your-Name>\"\n\n# Tells Git your email\ngit config --global user.email \"<Your-email-address>\"\n\n# Tells Git to display colorful outputs\ngit config --global color.ui auto\n\n# code editor (optional)\n# VSCode setup\ngit config --global core.editor \"code --wait\"\n\n# check your configuration settings\ngit config --list\n\nAwesome, let’s get started!"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#file-workflow",
+    "href": "git_intro_with_quarto.html#file-workflow",
+    "title": "",
+    "section": "File Workflow",
+    "text": "File Workflow"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#some-common-terms",
+    "href": "git_intro_with_quarto.html#some-common-terms",
+    "title": "",
+    "section": "Some common terms",
+    "text": "Some common terms\nVersion Control System\n     - Revert project back to a specific previous state\n     - See who last modified something that caused a problem 😇\n     - See who introduced an issue\nWorking Tree\n     - The files in the computer’s file system\n     - This is contrast to the files that have been saved (in commits)\n       in the repository\nStaging Area(Index)\n     - A file in the git directory that stores info about what will go into your\n       next commit\n     - Stores file content in .git/object, updates index file, .git/index"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#some-common-terms-1",
+    "href": "git_intro_with_quarto.html#some-common-terms-1",
+    "title": "",
+    "section": "Some common terms",
+    "text": "Some common terms\nCommit\n     - snapshot\n     - Takes a picture of what all your files look like and stores a reference\nSHA(SHA hash)\n     - a 40-character ID number for each comit\n     - e.g. b48c24300bbad66d6b62ac146a50973cc1a3d0a2\nRepository(Repo)\n     - A directory that contains your project work, .git folder\n     - Can exist locally or as a remote copy on another computer.\nbranch\n     - When a new line of development is created that diverges of the main\n       line of development.\n     - This alternative line of development can continue without altering\n       the main line"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#create-a-git-repo",
+    "href": "git_intro_with_quarto.html#create-a-git-repo",
+    "title": "",
+    "section": "Create a git repo",
+    "text": "Create a git repo\nBefore making any commits or do anything else, the repository needs to actually exist.\n$ git init\nInitialized empty Git repository in C:/Users/Brian/Documents/git_intro_with_quarto/.git/\ngit init command sets up all the necessary files that git will use to keep track of everything. All of these file are stored in a hidden directory called .git, which is th repo"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#clone-a-git-repo",
+    "href": "git_intro_with_quarto.html#clone-a-git-repo",
+    "title": "",
+    "section": "Clone a git repo",
+    "text": "Clone a git repo\nYou found a interesting repo and want to further dive into it, then you make an identical copy to your computer.\n\n$ git clone https://github.com/anan0329/git_intro_with_quarto.git\nCloning into 'git_intro_with_quarto'...\nremote: Enumerating objects: 134, done.\nremote: Counting objects: 100% (134/134), done.\nremote: Compressing objects: 100% (107/107), done.\nremote: Total 134 (delta 21), reused 133 (delta 20), pack-reused 0\nReceiving objects: 100% (134/134), 2.13 MiB | 744.00 KiB/s, done.\nResolving deltas: 100% (21/21), done."
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#check-a-repos-status",
+    "href": "git_intro_with_quarto.html#check-a-repos-status",
+    "title": "",
+    "section": "Check a repo’s status",
+    "text": "Check a repo’s status\nEverytime you works with a project, you should first check the status using git status\n\nWhen starting a project with no files…\n\n$ git status\nOn branch main\nNo commits yet\nnothing to commit (create/copy files and use \"git add\" to track)\n\nOn branch main - means that Git is on the main(default) branch\nnothing to commit - means that there are no pending changes\n\n\nWhen cd to a cloned repo…\n\n$ git status\nOn branch main\nYour branch is up to date with 'origin/main'.\nnothing to commit, working tree clean\n\nYour branch is up to date with ‘origin/main’. - means that the project is in sync with the one we cloned from."
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#check-a-repos-status-1",
+    "href": "git_intro_with_quarto.html#check-a-repos-status-1",
+    "title": "",
+    "section": "Check a repo’s status",
+    "text": "Check a repo’s status\n\nWhen working along with a project…\n\n$ git status\nOn branch main\nYour branch is up to date with 'origin/main'.\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n        modified:   git_intro.qmd\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n        images/github_clone.png\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\n\nWe will cover these new terms later."
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#display-a-repos-comments",
+    "href": "git_intro_with_quarto.html#display-a-repos-comments",
+    "title": "",
+    "section": "Display a repo’s comments",
+    "text": "Display a repo’s comments\nAfter making several commits, or cloning a repository, you’ll probably want to look back to see what has happened using git log.\n$ git log\ncommit 890fde39e7ac039a9b585a9e50bb459f0a176b89 (HEAD -> main, origin/main, origin/HEAD)\nAuthor: Brian Yang <anan0329@yahoo.com.tw>\nDate:   Thu Aug 25 11:23:30 2022 +0800\n\n    add git init description\n\ncommit 154a025c63dff3968ab6a6776fe7a4c89a861311\nAuthor: Brian Yang <anan0329@yahoo.com.tw>\nDate:   Thu Aug 25 10:47:39 2022 +0800\n\n    add empty readme file\n\n...\n\ncommit 6a420fbc969f587a3ff76bbcd74947f59c259b8b\nAuthor: Brian Yang <anan0329@yahoo.com.tw>\nDate:   Sat Aug 20 22:45:10 2022 +0800\n\n    initial commit\n\n    create some folder & files\n\nSHA - 890fde39e7ac039a9b585a9e50bb459f0a176b89\nHEAD - the pointer to the current branch reference\ncommit message - add git init description"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#display-a-repos-comments-1",
+    "href": "git_intro_with_quarto.html#display-a-repos-comments-1",
+    "title": "",
+    "section": "Display a repo’s comments",
+    "text": "Display a repo’s comments\nYou can also alter how Git displays the repo’s information.\n\n\nonelinestatisticspatchformatlimit\n\n\n\n--oneline flag only outputs first 7 SHA, head, and commit messages\n\n$ git log --oneline\n890fde3 (HEAD -> main, origin/main) add git init description\n154a025 add empty readme file\nf1c762a make workflow page & common terms explanation\n232d6ef Demonstrate commit changes\na6aa8ad version control & setup\nccd721a format title page with image\nb48c243 set theme format\n1f66364 set format & add title page\n6a420fb initial commit\n\n\n\n--stat flag displays the files that have been changed in the commit, also the number of lines that have been added / deleted\n\ncommit ccd721a1b0cc2c839b93effc398c131d3ef0b8cc\nAuthor: Brian Yang <anan0329@yahoo.com.tw>\nDate:   Sun Aug 21 01:11:15 2022 +0800\n\n    format title page with image\n\n git_intro.html                                      |   6 ++++--\n git_intro.qmd                                       |   5 ++++-\n git_intro_files/libs/revealjs/dist/theme/quarto.css |   4 ++--\n images/git_nasil_kullanilir_straight.png            | Bin 0 -> 35824 bytes\n 4 files changed, 10 insertions(+), 5 deletions(-)\n\ncommit b48c24300bbad66d6b62ac146a50973cc1a3d0a2\n...\n\n\n\n-p flag displays the actual changes made to a file\n\ncommit 232d6ef8a37e957395b0b82b183d2e868fe910cc\nAuthor: Brian Yang <anan0329@yahoo.com.tw>\nDate:   Sun Aug 21 20:41:04 2022 +0800\n\n    Demonstrate commit changes\n\ndiff --git a/git_intro.qmd b/git_intro.qmd\nindex 84b4716..4ec5ff6 100644\n--- a/git_intro.qmd\n+++ b/git_intro.qmd\n@@ -30,11 +30,14 @@ editor: source\n - Control **VERSION**\n\n - A version control system is a software that helps you control / manage different versions of source code.\n+:::\n+\n+. . .\n\n - Two main types of VCS model:\n   + centralized - all users connect to a central repository <img src=\"https://upload.wikimedia.org/wikipedia/commons/2/22/Apache_Subversion_logo.svg\" style=\"display: inline-block; margin: 0; margin-bottom: -2px; height: 35px;\"/></img>\n   + distributed - each user has the entire repository on their machine <img src=\"https://miro.medium.com/max/766/1*co_1qORNdM0PI1nvCp7Iig.png\" style=\"display: inline-block; margin: 0; margin-bottom: -2px; height: 35px;\"/></img> <img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Mercurial_no_border_logo.svg/800px-Mercurial_no_border_logo.svg.png\" style=\"display: inline-block; margin: 0; margin-bottom: -2px; height: 35px;\"/></img>\n-:::\n+\n\n\n ## Setup\n\n...\n\ngit show does the same thing\n\n\n\n\n--pretty option changes output format. Some of the arguments are oneline, short, full, and fuller\n\n$ git log --pretty=format:\"%h - %an, %ar : %s\"\n890fde3 - Brian Yang, 4 hours ago : add git init description\n154a025 - Brian Yang, 4 hours ago : add empty readme file\nf1c762a - Brian Yang, 5 hours ago : make workflow page & common terms explanation\n232d6ef - Brian Yang, 4 days ago : Demonstrate commit changes\na6aa8ad - Brian Yang, 4 days ago : version control & setup\nccd721a - Brian Yang, 5 days ago : format title page with image\nb48c243 - Brian Yang, 5 days ago : set theme format\n1f66364 - Brian Yang, 5 days ago : set format & add title page\n6a420fb - Brian Yang, 5 days ago : initial commit\n\n\n\nTime limiting options such as --since and --until with lots of formats, such as 2.weeks, “2022-8-25”, 2 years 1 day 3 minutes ago\n\n$ git log --since=10.hours\ncommit 890fde39e7ac039a9b585a9e50bb459f0a176b89 (HEAD -> main, origin/main)\nAuthor: Brian Yang <anan0329@yahoo.com.tw>\nDate:   Thu Aug 25 11:23:30 2022 +0800\n\n    add git init description\n\ncommit 154a025c63dff3968ab6a6776fe7a4c89a861311\nAuthor: Brian Yang <anan0329@yahoo.com.tw>\nDate:   Thu Aug 25 10:47:39 2022 +0800\n\n    add empty readme file"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#add-files-to-a-repo",
+    "href": "git_intro_with_quarto.html#add-files-to-a-repo",
+    "title": "",
+    "section": "Add files to a repo",
+    "text": "Add files to a repo\nSo, we’ve seen a lot commands to keep track of a Git repo. Now its time to add something to commit.\n\nClean repo\n\n$ git status\nOn branch main\nYour branch is up to date with 'origin/main'.\nnothing to commit, working tree clean\n\nAdd a html file of “hello world”, a empty src folder\n\n$ echo \"hello world\" > add_something.html && mkdir src\n$ git status\n...\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n        add_something.html\n        src/\n\nnothing added to commit but untracked files present (use \"git add\" to track)\n\nUntracked files says there are two untracked files in the working tree.\ngit add is used to move files from working tree to staging area"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#add-files-to-a-repo-1",
+    "href": "git_intro_with_quarto.html#add-files-to-a-repo-1",
+    "title": "",
+    "section": "Add files to a repo",
+    "text": "Add files to a repo\n\nUse git add to add files to stagin area. You can add all files once using git add . (be careful)\n\n$ git add add_something.html\n$ git status\n...\nChanges to be committed:\n  (use \"git restore --staged <file>...\" to unstage)\n        new file:   add_something.html\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n        src/\n\nChanges to be committed displays files that are in the staging area\nIf we make a commit right now, only the add_something.html would be committed since it is tracked.\n\n\n\n\n\n\n\nTip\n\n\n(use “git restore –staged …” to unstage) if you accidently ran git add and gave it the wrong file."
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#commit-files-to-a-repo",
+    "href": "git_intro_with_quarto.html#commit-files-to-a-repo",
+    "title": "",
+    "section": "Commit files to a repo",
+    "text": "Commit files to a repo\nTo make a commit in Git, use git commit -m <Your comment> command.\n$ git commit -m \"Initial commit\"\n[main cca3428] Initial commit\n 2 files changed, 2 insertions(+)\n create mode 100644 add_something.html\n create mode 100644 src/myfun.py\nIf setted code editor before, running git commit will pop up something like this in your editor. Type some text, save it, and close the editor window also do the work."
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#commit-files-to-a-repo-1",
+    "href": "git_intro_with_quarto.html#commit-files-to-a-repo-1",
+    "title": "",
+    "section": "Commit files to a repo",
+    "text": "Commit files to a repo\nLets see the git status.\n$ git status\nOn branch main\nnothing to commit, working tree clean\n If above steps are done under a cloned repo, you shall see these.\n$ git status\nOn branch main\nYour branch is ahead of 'origin/main' by 1 commit.\n  (use \"git push\" to publish your local commits)\n\nnothing to commit, working tree clean\n\n\n\n\n\n\nTip\n\n\n(use “git push” to publish your local commits) indicates what you should do to push your works to the remote repository."
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#good-commit-messages",
+    "href": "git_intro_with_quarto.html#good-commit-messages",
+    "title": "",
+    "section": "Good commit messages",
+    "text": "Good commit messages\n\nHow do I write a good commit message?\n\nDO\n    - do keep the message short\n    - do explain what the commit does\nDo not\n    - do not explain why or how the changes are made\n    - do not use the word “and”, break the changes into separate columns."
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#is-the-following-commit-message-good",
+    "href": "git_intro_with_quarto.html#is-the-following-commit-message-good",
+    "title": "",
+    "section": "Is the following commit message good?",
+    "text": "Is the following commit message good?\n\n\n\n\n\n\nCommit - Update the footer to copyright information\n\n\n\n\n\n\n\n\nYes, the commit is short. It explains what but not how or why\n\n\n\n\n\n\n\n\n\nCommit - Add a tag to the body\n\n\n\n\n\n\n\n\n\nNo, the commit should not contain specifics on how the change was made. This information can be found by running git log -p\n\n\n\n\n\n\n\n\n\nCommit - Add changes to text.txt\n\n\n\n\n\n\n\n\n\nNo, saying the changes have been made is not helpful. Saying what has changed (new content, content being removed, content being altered) to “text.txt”"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#find-what-changes-were-made",
+    "href": "git_intro_with_quarto.html#find-what-changes-were-made",
+    "title": "",
+    "section": "Find what changes were made",
+    "text": "Find what changes were made\nImagine a situation. You start working on the next feature to a fantastic project at night, but then go to bed before you actually finish. When you start working the next day, there are uncommitted changes.\n\ngit status will tell us what files have been changed, but not those changes actually were.\ngit log won’t help at this time since the changes aren’t committed yet.\n\n\n\nThe git diff command is used to find out this information.\n\n\n\n$ echo \"origin\" > sample.txt # origin\n$ git add sample.txt\n$ sed -i 's/origin/modified/' sample.txt # modified\n$ git diff\ndiff --git a/sample.txt b/sample.txt\nindex 6092425..2e09960 100644\n--- a/sample.txt\n+++ b/sample.txt\n@@ -1 +1 @@\n-origin\n+modified"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#some-file-to-be-ignored",
+    "href": "git_intro_with_quarto.html#some-file-to-be-ignored",
+    "title": "",
+    "section": "Some file to be ignored",
+    "text": "Some file to be ignored\n\nA gitignore file specifies intentionally untracked files that Git should ignore, such as S3 bucket access key, .Rhistory, and __pycache__/\nFiles already tracked by Git are not affected.\nA collection of .gitignore templates\n\n$ ls -A\n.git/ git_intro.html git_intro.qmd git_intro_files/ images/ powerpoint.pptx readme.md theme/\n\n$ git status\nOn branch main\nYour branch is up to date with 'origin/main'.\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n        modified:   git_intro.html\n        modified:   git_intro.qmd\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n        powerpoint.pptx\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\n\n$ echo \"powerpoint.pptx\" > .gitignore\n\n$ git status\nOn branch main\nYour branch is up to date with 'origin/main'.\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n        modified:   git_intro.html\n        modified:   git_intro.qmd\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n        .gitignore\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#multiple-files-to-be-ignored",
+    "href": "git_intro_with_quarto.html#multiple-files-to-be-ignored",
+    "title": "",
+    "section": "Multiple files to be ignored",
+    "text": "Multiple files to be ignored\n\nWhat if there are plenty of files to ignore?\n\n\n\nGlobbing is what you need!\n\nSome useful wildcards:\n# ignore all .a files\n*.a\n\n# but do track lib.a, even though you're ignoring .a files above\n!lib.a\n\n# only ignore the TODO file in the current directory, not subdir/TODO\n/TODO\n\n# ignore all files in any directory named build\nbuild/\n\n# ignore doc/notes.txt, but not doc/server/arch.txt\ndoc/*.txt\n\n# ignore doc/a_lvr_land_a.csv, but not doc/a_lvr_land_c.csv\ndoc/a_lvr_land_[ab].csv\n\n# ignore all .pdf files in the doc/ directory and any of its subdirectories\ndoc/**/*.pdf"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#add-a-tag",
+    "href": "git_intro_with_quarto.html#add-a-tag",
+    "title": "",
+    "section": "Add a tag",
+    "text": "Add a tag\n\nNow you’ve done a ton of things, it’s time to add a tag to target specific commits.\n\n\n\nAddShowDelete\n\n\n# add tag to the most recent commit\n$ git tag -a v1.0 -m \"Ready to commit!\"\n\n# add tag to a specific commit if a SHA is passed\n$ git tag -a v0.1 6a420fb -m \"Create project\"\n$ git tag -a v0.2 1f66364 -m \"redundant tag\"\n\n\n$ git log --oneline\n5f3e206 (HEAD -> main, tag: v1.0, origin/main) Finished intro of making local commit stuffs\na743329 Add gitignore introduction\n78a2a15 Add diff intro & minor fix of code-line-numbers to show whole picture & add .gitignore file\n...\n1f66364 (tag: v0.2) set format & add title page\n6a420fb (tag: v0.1) initial commit\n\n$ git show v1.0\ntag v1.0\nTagger: Brian Yang <anan0329@yahoo.com.tw>\nDate:   Thu Aug 25 22:32:19 2022 +0800\n\nReady to commit!\n\ncommit 5f3e2063f93c315e504a8b6143675883aabb02e7 (HEAD -> main, tag: v1.0, origin/main)\nAuthor: Brian Yang <anan0329@yahoo.com.tw>\nDate:   Thu Aug 25 22:29:17 2022 +0800\n\n    Finished intro of making local commit stuffs\n\ndiff --git a/.gitignore b/.gitignore\nindex b4c5ba3..c0f7575 100644\n--- a/.gitignore\n+++ b/.gitignore\n...\n\n\n$ git tag -d v0.2\nDeleted tag 'v0.2' (was 0a84c13)\n\n$ git log --oneline\n5f3e206 (HEAD -> main, tag: v1.0, origin/main) Finished intro of making local commit stuffs\na743329 Add gitignore introduction\n78a2a15 Add diff intro & minor fix of code-line-numbers to show whole picture & add .gitignore file\n...\n1f66364 set format & add title page\n6a420fb (tag: v0.1) initial commit"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#what-does-branch-do",
+    "href": "git_intro_with_quarto.html#what-does-branch-do",
+    "title": "",
+    "section": "What does branch do",
+    "text": "What does branch do"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#what-does-branch-do-1",
+    "href": "git_intro_with_quarto.html#what-does-branch-do-1",
+    "title": "",
+    "section": "What does branch do",
+    "text": "What does branch do\ngit branch command is used to interact with Git’s branches\n\nlistcreatedelete\n\n\n$ git branch\n* main\n\nThe active branch has an * next to it\n\n\n\n$ git branch sidebar\n\n# create the to_delete branch and have it point to the commit with SHA a65243c \n$ git branch to_delete a65243c\n\n$ git branch\n* main\n  sidebar\n\n$ git log --oneline\n5246cbe (HEAD -> main, sidebar) add samples\na65243c (to_delete) test commit\n\n\n\n$ git branch -d to_delete\nDeleted branch to_delete (was a65243c).\n\n$ git branch\n* main\n  sidebar\n\n\n\n\n\nEven though you created the sidebar branch, it’s not the current branch just yet. We need to switch to it via git checkout.\n\n$ git log --oneline\n5246cbe (HEAD -> main, sidebar) add samples\na65243c test commit\n\n$ git checkout sidebar\nSwitched to branch 'sidebar'\n\n$ git log --oneline\n5246cbe (HEAD -> sidebar, main) add samples\na65243c test commit\n\n# git checkout -b to_delete creates and changes to_delete all in one command."
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#what-does-branch-do-2",
+    "href": "git_intro_with_quarto.html#what-does-branch-do-2",
+    "title": "",
+    "section": "What does branch do",
+    "text": "What does branch do\nLet’s play around with branches for a while\n$ git branch\n* main\n  sidebar\n\n$ echo \"only on main\" > onlyOnMain.txt\n\n$ git commit -a -m \"Things that are only on main branch\"\n[main 7a24509] Things that are only on main branch\n 1 file changed, 1 insertion(+)\n create mode 100644 onlyOnMain.txt\n\n$ ls -A\n.git/  add_something.html  onlyOnMain.txt  sample.txt  src/\n\n$ git checkout sidebar\nSwitched to branch 'sidebar'\n\n$ ls -A\n.git/  add_something.html  sample.txt  src/"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#magic-merge",
+    "href": "git_intro_with_quarto.html#magic-merge",
+    "title": "",
+    "section": "Magic merge",
+    "text": "Magic merge\n\ngit merge Combining branches together.\nThere are two main types of merges in Git, a Fast-forward merge and a regular merge.\nSometimes a merge is performed and fails, that is called a merge conflict"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#magic-merge-1",
+    "href": "git_intro_with_quarto.html#magic-merge-1",
+    "title": "",
+    "section": "Magic merge",
+    "text": "Magic merge"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#fast-forward-merge",
+    "href": "git_intro_with_quarto.html#fast-forward-merge",
+    "title": "",
+    "section": "Fast-forward merge",
+    "text": "Fast-forward merge\n# preparation\n$ mkdir git_merge_test && cd $_\n$ git init\n$ git commit --allow-empty -m \"Initial Commit\"\n[main (root-commit) 2b11fd0] Initial Commit\n$ git commit --allow-empty -m \"This is where main stays\"\n[main b456283] This is where main stays\n\n$ git checkout -b footer\nSwitched to a new branch 'footer'\n$ git commit --allow-empty -m \"footer: one step ahead of main\"\n[footer a7193f3] footer: one step ahead of main\n$ git commit --allow-empty -m \"footer: newnew\"\n[footer ee4f1bd] footer: newnew\n\n$ git log --oneline\nee4f1bd (HEAD -> footer) footer: newnew\na7193f3 footer: one step ahead of main\nb456283 (main) This is where main stays\n2b11fd0 Initial Commit\n\n$ git checkout main\nSwitched to branch 'main'\n\n$ git log --oneline\nb456283 (HEAD -> main) This is where main stays\n2b11fd0 Initial Commit\n\n# merge\n$ git merge footer\nUpdating b456283..ee4f1bd\nFast-forward\n\n$ git log --oneline\nee4f1bd (HEAD -> main, footer) footer: newnew\na7193f3 footer: one step ahead of main\nb456283 This is where main stays\n2b11fd0 Initial Commit"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#magic-merge-2",
+    "href": "git_intro_with_quarto.html#magic-merge-2",
+    "title": "",
+    "section": "Magic merge",
+    "text": "Magic merge"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#recursive-merge",
+    "href": "git_intro_with_quarto.html#recursive-merge",
+    "title": "",
+    "section": "Recursive merge",
+    "text": "Recursive merge\n# preparation\n$ mkdir git_recursie_test && cd $_\n$ git init\n$ git commit --allow-empty -m \"Initial Commit\"\n[main (root-commit) 63055a5] Initial Commit\n$ git commit --allow-empty -m \"This is a fork in the road\"\n[main dd7166d] This is a fork in the road\n\n$ git commit --allow-empty -m \"lonely main first\"\n[main c5e8a87] lonely main first\n$ git commit --allow-empty -m \"lonely main second\"\n[main 2705bec] lonely main second\n\n$ git branch sidebar dd7166d\n$ git checkout sidebar\nSwitched to branch 'sidebar'\n$ git log --oneline\ndd7166d (HEAD -> sidebar) This is a fork in the road\n63055a5 Initial Commit\n\n$ git commit --allow-empty -m \"lonely sidebar first\"\n[sidebar 4282431] lonely sidebar first\n$ git commit --allow-empty -m \"lonely sidebar second\"\n[sidebar 3a2a110] lonely sidebar second\n\n$ git checkout main\nSwitched to branch 'main'\n\n# merge\n$ git merge sidebar\nAlready up to date.\nMerge made by the 'recursive' strategy.\n\n$ git log --oneline\nf5fd8f3 (HEAD -> main) Merge branch 'sidebar'\n3a2a110 (sidebar) lonely sidebar second\n4282431 lonely sidebar first\n2705bec lonely main second\nc5e8a87 lonely main first\ndd7166d This is a fork in the road\n63055a5 Initial Commit"
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#merge-conflicts",
+    "href": "git_intro_with_quarto.html#merge-conflicts",
+    "title": "",
+    "section": "Merge conflicts",
+    "text": "Merge conflicts\n\nIf a merge conflict does occur, Git will try to combine as much as it can, but then it will leave special markers (e.g. >>> and <<<) that tell you where you needs to manually fix.\nGit tracks lines in files. A merge conflict will happen when the exact same line(s) are changed in separate branches."
+  },
+  {
+    "objectID": "git_intro_with_quarto.html#merge-conflicts-1",
+    "href": "git_intro_with_quarto.html#merge-conflicts-1",
+    "title": "",
+    "section": "Merge conflicts",
+    "text": "Merge conflicts\n# prepare\n$ mkdir git_conflict_test && cd $_\n$ git init\n$ echo -e \"Hello World \\nsecond line \\nWhatever third line\" >> greetings.txt\n$ cat greetings.txt\nHello World\nsecond line\nWhatever third line\n\n$ git commit -a -m \"base greeting points to here\"\n[master (root-commit) 162b7bf] base greeting points to here\n 1 file changed, 3 insertions(+)\n create mode 100644 greetings.txt\n\n$ sed -i 's/whatever third line/main is the best/' greetings.txt # modified main\n$ git commit -a -m \"changed third line for main\"\n[master 74cd2d6] changed third line for main\n 1 file changed, 1 insertion(+), 1 deletion(-)\n\n$ git branch competitor 162b7\n$ git branch\n  competitor\n* master\n$ git log --oneline\n74cd2d6 (HEAD -> master) changed third line for main\n162b7bf (competitor) base greeting points to here\n\n$ sed -i 's/whatever third line/No, I'm the best = =/' greetings.txt # modified competitor\n$ git commit -a -m \"changed third line for competitor\"\n[competitor 182183d] changed third line for competitor\n 1 file changed, 1 insertion(+), 1 deletion(-)\n\n# verify competitor changes\n$ git log --oneline\n182183d (HEAD -> competitor) changed third line for competitor\n162b7bf base greeting points to here\n$ git show 182183d\ncommit 182183d28ee25b32e99996ced5f994bb8117aa54 (HEAD -> competitor)\nAuthor: Brian Yang <anan0329@yahoo.com.tw>\nDate:   Fri Aug 26 04:09:24 2022 +0800\n\n    changed third line for competitor\n\ndiff --git a/greetings.txt b/greetings.txt\nindex 0fde4b1..92446e9 100644\n--- a/greetings.txt\n+++ b/greetings.txt\n@@ -1,3 +1,3 @@\n Hello World\n second line\n-Whatever third line\n+No, I'm the best = =\n\n# verify main changes\n$ git checkout master\nSwitched to branch 'master'\n$ git log --oneline\n74cd2d6 (HEAD -> master) changed third line for main\n162b7bf base greeting points to here\n$ git show 74cd2d6\ncommit 74cd2d61cabe554362b8645c70a212be5cb37e43 (HEAD -> master)\nAuthor: Brian Yang <anan0329@yahoo.com.tw>\nDate:   Fri Aug 26 04:06:39 2022 +0800\n\n    changed third line for main\n\ndiff --git a/greetings.txt b/greetings.txt\nindex 0fde4b1..d02fe9a 100644\n--- a/greetings.txt\n+++ b/greetings.txt\n@@ -1,3 +1,3 @@\n Hello World\n second line\n-Whatever third line\n+main is the best\n\n# merge, found conflicts\n$ git merge competitor\nAuto-merging greetings.txt\nCONFLICT (content): Merge conflict in greetings.txt\nAutomatic merge failed; fix conflicts and then commit the result.\n\n# checkout status for more information\n$ git status\nOn branch master\nYou have unmerged paths.\n  (fix conflicts and run \"git commit\")\n  (use \"git merge --abort\" to abort the merge)\n\nUnmerged paths:\n  (use \"git add <file>...\" to mark resolution)\n        both modified:   greetings.txt\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\n\n# decided final result at code editor and commit.\n$ git commit -m \"main wins the game\"\n[master 1a995d3] main wins the game\n\n$ git log --oneline\n1a995d3 (HEAD -> master) main wins the game\n182183d (competitor) changed third line for competitor\n74cd2d6 changed third line for main\n162b7bf base greeting points to here"
+  },
+  {
+    "objectID": "readme.html",
+    "href": "readme.html",
+    "title": "",
+    "section": "",
+    "text": "Git Introduction with Quarto\n\n\n\nA beginner introduction to git using quarto.\nReference:\n\nhttps://git-scm.com/\nhttps://www.udacity.com/course/version-control-with-git–ud123\nhttps://jthomasmock.github.io/quarto-2hr-webinar/"
+  }
+]
